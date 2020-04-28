@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PhotoEditor</string>
+    <string name="openPhoto">Нажмите в любом месте, чтобы открыть фото</string>
 </resources>
