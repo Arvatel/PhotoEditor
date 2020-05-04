@@ -1,31 +1,29 @@
 package com.arvatel.photoeditor
 
+import android.graphics.Bitmap
+import android.os.AsyncTask
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
+import androidx.core.graphics.drawable.toBitmap
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_rotation.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
+private const val PHOTO_BITMAP = "photoBitmap"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FragmentRotation.newInstance] factory method to
- * create an instance of this fragment.
  */
 class FragmentRotation : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+     lateinit var bitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            bitmap = it.getParcelable(PHOTO_BITMAP)!!
         }
     }
 
@@ -37,22 +35,67 @@ class FragmentRotation : Fragment() {
         return inflater.inflate(R.layout.fragment_rotation, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        //my code goes here
+        fragmentPhoto.setImageBitmap(bitmap)
+        //seekBar listener
+        seekBar.setOnSeekBarChangeListener(
+            object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
+                    showProgress(progress.toString())
+
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar) {
+                    // Do something
+                }
+
+                override fun onStopTrackingTouch(seekBar: SeekBar) {
+                    // Do something
+                }
+            })
+        //finish
+        finishFragmentBV.setOnClickListener { finishFragment() }
+        toTheLeftBV.setOnClickListener { toTheLeft() }
+        discaredBV.setOnClickListener {
+            (activity as MainActivity).closeFragment(this)
+        }
+    }
+
+    private fun toTheLeft() {
+            val rotatedBitmap: Bitmap = Rotate.rotate(bitmap)
+            bitmap = rotatedBitmap
+            fragmentPhoto.setImageBitmap(rotatedBitmap)
+
+    }
+
+
+    private fun finishFragment() {
+
+        (activity as MainActivity).closeFragment(this)
+        (activity as MainActivity).showTheNewImage(fragmentPhoto.drawable.toBitmap())
+        //todo if the photo is reduced then i should make the changes to the original photo in asynic task
+    }
+
+    private fun showProgress(progress: String) {
+
+        progressBarValue.text = progress
+        val rotatedBitmap: Bitmap = Rotate.rotate(bitmap, progress.toDouble())
+
+        fragmentPhoto.setImageBitmap(rotatedBitmap)
+    }
+
     companion object {
         /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragment.
+         * @param bitmap
+         * @return A new instance of fragment FragmentRotation.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(bitmap: Bitmap) =
             FragmentRotation().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelable(PHOTO_BITMAP, bitmap)
                 }
             }
     }
