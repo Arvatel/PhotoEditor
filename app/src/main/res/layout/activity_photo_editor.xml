@@ -7,11 +7,23 @@
     tools:context=".PhotoEditorActivity">
 
     <fragment
-        android:id="@+id/toolBerFragment"
+        android:id="@+id/toolBarFragment"
         android:name="com.arvatel.photoeditor.ToolBarFragment"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/toolBarFragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

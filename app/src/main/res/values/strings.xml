@@ -2,6 +2,7 @@
     <string name="app_name">PhotoEditor</string>
     <string name="openPhoto">Нажмите в любом месте, чтобы открыть фото</string>
 
+    <string name="hello_blank_fragment">hello</string>
     <string name="textStyle">STYLES</string>
     <string name="textTool">TOOLS</string>
     <string name="textExport">EXPORT</string>
