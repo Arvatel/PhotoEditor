@@ -15,10 +15,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <fragment
+        android:id="@+id/tempToolBarFragment"
+        android:name="com.arvatel.photoeditor.BottomSheetToolFragment"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toTopOf="@id/toolBarFragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/toolBarFragment"
+        app:layout_constraintBottom_toTopOf="@id/tempToolBarFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,7 +38,7 @@
 
             <fragment
                 android:id="@+id/fragment"
-                android:name="com.arvatel.photoeditor.PhotoFragment"
+                android:name="com.arvatel.photoeditor.ShowPhotoFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="8dp"

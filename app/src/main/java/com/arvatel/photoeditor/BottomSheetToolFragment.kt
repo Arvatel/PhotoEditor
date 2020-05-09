@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class BottonSheetToolFragment : Fragment() {
+class BottomSheetToolFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +16,7 @@ class BottonSheetToolFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_botton_sheet_tool, container, false)
+        return inflater.inflate(R.layout.fragment_bottom_sheet_tool, container, false)
     }
 
 }
