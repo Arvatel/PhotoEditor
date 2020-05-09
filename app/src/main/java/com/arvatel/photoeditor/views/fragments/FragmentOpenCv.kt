@@ -23,7 +23,7 @@ class FragmentOpenCv : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             bitmap = it.getParcelable(PHOTO_BITMAP)!!
-
+            bitmap = bitmap.copy(bitmap.config, true)//create copy of the original one not to modify the original one
         }
     }
 
@@ -38,7 +38,7 @@ class FragmentOpenCv : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         OpenCVLoader.initDebug();
-        val img = OpenCvUtil.processImage(bitmap)
+        val img = OpenCvUtil.searchForShapes(bitmap)
         opencvImageView.setImageBitmap(img)
     }
 
