@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.arvatel.photoeditor.R
-import kotlinx.android.synthetic.main.fragment_filter.*
+import com.arvatel.photoeditor.algorithms.OpenCvUtil
+import kotlinx.android.synthetic.main.fragment_opencv.*
+import org.opencv.android.OpenCVLoader
 
 
 private const val PHOTO_BITMAP = "photoBitmap"
@@ -35,9 +37,9 @@ class FragmentOpenCv : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-
-
+        OpenCVLoader.initDebug();
+        val img = OpenCvUtil.processImage(bitmap)
+        opencvImageView.setImageBitmap(img)
     }
 
     companion object {

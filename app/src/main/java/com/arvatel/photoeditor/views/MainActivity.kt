@@ -1,6 +1,5 @@
 package com.arvatel.photoeditor.views
 
-import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
@@ -14,7 +13,7 @@ import com.arvatel.photoeditor.R
 import com.arvatel.photoeditor.views.fragments.FragmentFilter
 import com.arvatel.photoeditor.views.fragments.FragmentOpenCv
 import com.arvatel.photoeditor.views.fragments.FragmentRotation
-import com.arvatel.photoeditor.views.fragments.FragmentScall
+import com.arvatel.photoeditor.views.fragments.FragmentScale
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -33,15 +32,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun startFragment(view: View) {
         view as Button
+        //extract the photo from the image view to send it to the fragment
         imageView.invalidate()
-        val bitmap = imageView.getDrawable().toBitmap()
-
+        val bitmap = imageView.drawable.toBitmap()
+        //get fragment object
         val fragment =
             when (view) {
                 opencvBV -> FragmentOpenCv.newInstance(bitmap)
                 filtersBV -> FragmentFilter.newInstance(bitmap)
                 rotationBV -> FragmentRotation.newInstance(bitmap)
-                else -> FragmentScall.newInstance(bitmap)
+                else -> FragmentScale.newInstance(bitmap)
             }
 
         val fragmentActivity = supportFragmentManager
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    //called from the fragment to terminate itself
     fun closeFragment(fragment: Fragment) {
         // Get the FragmentManager.
         val fragmentManager: FragmentManager = supportFragmentManager
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.remove(fragment).commit()
     }
 
+    //called from the fragment to show the new results
     fun showTheNewImage(bitmap: Bitmap) {
         imageView.setImageBitmap(bitmap)
     }

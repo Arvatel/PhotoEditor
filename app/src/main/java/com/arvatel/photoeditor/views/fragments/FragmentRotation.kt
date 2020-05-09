@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
-import com.arvatel.photoeditor.views.MainActivity
 import com.arvatel.photoeditor.R
 import com.arvatel.photoeditor.algorithms.Rotate
+import com.arvatel.photoeditor.views.MainActivity
 import kotlinx.android.synthetic.main.fragment_rotation.*
 
 
@@ -18,6 +18,7 @@ private const val PHOTO_BITMAP = "photoBitmap"
 
 class FragmentRotation : Fragment() {
      lateinit var bitmap: Bitmap
+    lateinit var thumbnail: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,28 +39,34 @@ class FragmentRotation : Fragment() {
         super.onActivityCreated(savedInstanceState)
         //my code goes here
         fragmentPhoto.setImageBitmap(bitmap)
+        //extract thumbnail
+        makeThumbnail();
         //seekBar listener
         seekBar.setOnSeekBarChangeListener(
             object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
-                    showProgress(progress.toString())
-
+                    showProgress(seekBar.progress.toString())
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar) {
-                    // Do something
                 }
 
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
-                    // Do something
+                    //todo make this process inside async task
+                    fragmentPhoto.setImageBitmap(Rotate.rotate(bitmap, seekBar.progress.toDouble()))
                 }
             })
         //finish
-        finishFragmentBV.setOnClickListener { finishFragment() }
         toTheLeftBV.setOnClickListener { toTheLeft() }
+        finishFragmentBV.setOnClickListener { finishFragment() }
         discaredBV.setOnClickListener {
             (activity as MainActivity).closeFragment(this)
         }
+    }
+
+    private fun makeThumbnail() {
+        val newHeight = 350 / (bitmap.width / bitmap.height)
+        thumbnail = Bitmap.createScaledBitmap(bitmap, 350, newHeight, true);
     }
 
     private fun toTheLeft() {
@@ -74,13 +81,12 @@ class FragmentRotation : Fragment() {
 
         (activity as MainActivity).closeFragment(this)
         (activity as MainActivity).showTheNewImage(fragmentPhoto.drawable.toBitmap())
-        //todo if the photo is reduced then i should make the changes to the original photo in asynic task
     }
 
     private fun showProgress(progress: String) {
 
         progressBarValue.text = progress
-        val rotatedBitmap: Bitmap = Rotate.rotate(bitmap, progress.toDouble())
+        val rotatedBitmap: Bitmap = Rotate.rotate(thumbnail, progress.toDouble())
 
         fragmentPhoto.setImageBitmap(rotatedBitmap)
     }

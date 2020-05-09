@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import com.arvatel.photoeditor.R
 import com.arvatel.photoeditor.algorithms.Filter
+import com.arvatel.photoeditor.views.MainActivity
 import kotlinx.android.synthetic.main.fragment_filter.*
+import kotlinx.android.synthetic.main.fragment_rotation.*
 
 
 private const val PHOTO_BITMAP = "photoBitmap"
@@ -37,23 +40,27 @@ class FragmentFilter : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         filterFragmentImageView.setImageBitmap(bitmap)
+
         applyGrey.setOnClickListener{applyGreyFilter()}
         applySketch.setOnClickListener{applySketchFilter()}
-        speia.setOnClickListener{applyspia()}
+        speia.setOnClickListener{applyspiaFilter()}
         applyBonus.setOnClickListener{applyCircularFilter()}
-        //can be usued to extract thumbnail
-//        val thumbImage = ThumbnailUtils.extractThumbnail(bitmap,320,320)
-//        val bitmapwithGreyFilter = Filter.applyGreyFilter(thumbImage)
-//        thumbnail.setImageBitmap(bitmapwithGreyFilter)
-
-
+        filterFinishBV.setOnClickListener{finishFragment()}
+        filterDiscardBV.setOnClickListener {
+            (activity as MainActivity).closeFragment(this)
+        }
     }
-    fun applyCircularFilter(){
-        val bitmapwithFilter = Filter.applyCircularFilter(bitmap)
-        filterFragmentImageView.setImageBitmap(bitmapwithFilter)
+    private fun finishFragment() {
+        (activity as MainActivity).closeFragment(this)
+        (activity as MainActivity).showTheNewImage(filterFragmentImageView.drawable.toBitmap())
     }
-    private fun applyspia() {
+    private fun applyCircularFilter(){
+        val bitmappingFilter = Filter.applyCircularFilter(bitmap)
+        filterFragmentImageView.setImageBitmap(bitmappingFilter)
+    }
+    private fun applyspiaFilter() {
         val bitmapwithFilter = Filter.applySpeiaFilter(bitmap)
         filterFragmentImageView.setImageBitmap(bitmapwithFilter)
     }
