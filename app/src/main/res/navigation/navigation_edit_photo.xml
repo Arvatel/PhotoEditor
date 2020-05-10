@@ -2,12 +2,4 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_edit_photo"
-    app:startDestination="@id/photoEditorActivity">
-
-    <activity
-        android:id="@+id/photoEditorActivity"
-        android:name="com.arvatel.photoeditor.PhotoEditorActivity"
-        android:label="activity_photo_editor"
-        tools:layout="@layout/activity_photo_editor" />
-</navigation>
+    android:id="@+id/navigation_edit_photo" />

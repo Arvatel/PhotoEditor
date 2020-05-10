@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_open_photo.*
+import kotlinx.android.synthetic.main.activity_photo_editor.*
+import kotlinx.android.synthetic.main.fragment_bottom_sheet_tool.*
 
 
 class MainActivity : AppCompatActivity() {

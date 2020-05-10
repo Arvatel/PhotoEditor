@@ -6,5 +6,8 @@
     <string name="textStyle">STYLES</string>
     <string name="textTool">TOOLS</string>
     <string name="textExport">EXPORT</string>
+    <string name="cancel">Cancel</string>
+    <string name="rotate">Rotate</string>
+    <string name="apply">Apply</string>
 
 </resources>

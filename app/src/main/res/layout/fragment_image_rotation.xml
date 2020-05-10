@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ImageRotationFragment">
 
-    <fragment
-        android:name="com.arvatel.photoeditor.ShowPhotoFragment"
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@id/rotationBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,10 +22,41 @@
         android:id="@+id/rotationBar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/toolBarRotation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/toolBarRotation"
+        style="@style/toolBarStyle"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/buttonRotate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/rotate" />
+
+        <Button
+            android:id="@+id/buttonApply"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/apply" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
