@@ -12,14 +12,21 @@
 
     </style>
 
-    <style name="toolBarStyle">
+    <style name="ToolBarStyle">
         <item name="android:layout_height">60dp</item>
-        <item name="android:layout_weight">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
     </style>
 
-    <style name="toolBarButtonStyle">
+    <style name="ToolBarButtonStyle">
     </style>
 
+    <style name="ShowPhotoStyle">
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
 
 
 </resources>

@@ -7,12 +7,11 @@
     tools:context=".ImageRotationFragment">
 
     <ImageView
+        android:id="@+id/rotationPhoto"
+        style="@style/ShowPhotoStyle"
+        android:src="@drawable/picture"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@id/rotationBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +28,7 @@
 
     <LinearLayout
         android:id="@+id/toolBarRotation"
-        style="@style/toolBarStyle"
+        style="@style/ToolBarStyle"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
