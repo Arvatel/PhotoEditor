@@ -10,29 +10,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.checkSelfPermission
 
+private val permissionList = arrayOf(
+    Manifest.permission.CAMERA,
+    Manifest.permission.READ_EXTERNAL_STORAGE,
+    Manifest.permission.WRITE_EXTERNAL_STORAGE
+)
+
+private const val MY_PERMISSION_REQUEST_CODE = 1001
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val context : Context = this
-        if (checkPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE))
-            Toast.makeText(context, "Storage, allow", Toast.LENGTH_LONG).show()
-        else Toast.makeText(context, "Storage, deny", Toast.LENGTH_LONG).show()
-        if (checkPermission(context, Manifest.permission.CAMERA))
-            Toast.makeText(context, "Camera, allow", Toast.LENGTH_LONG).show()
-        else Toast.makeText(context, "Camera, deny", Toast.LENGTH_LONG).show()
+        requestPermissions()
     }
 
-
-}
-
-fun checkPermission(context : Context, types : String) : Boolean {
-
-    return when(checkSelfPermission(context, types)){
-        PackageManager.PERMISSION_GRANTED -> true
-        PackageManager.PERMISSION_DENIED -> false
-        else -> false
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(this, permissionList, MY_PERMISSION_REQUEST_CODE)
     }
 }
