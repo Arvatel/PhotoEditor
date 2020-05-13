@@ -17,6 +17,8 @@ class PhotoEditorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_photo_editor, container, false)
+
+        view.showImage.setImageBitmap(currentImage);
         view.buttonRotateBS.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_imageRotationFragment)
         }

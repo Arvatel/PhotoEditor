@@ -50,12 +50,12 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/fragment"
+                android:id="@+id/showImage"
                 style="@style/ShowPhotoStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/picture" />
+                android:src="@drawable/ic_launcher_background" />
 
         </androidx.core.widget.NestedScrollView>
 

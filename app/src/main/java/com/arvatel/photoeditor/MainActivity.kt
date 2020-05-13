@@ -1,6 +1,8 @@
 package com.arvatel.photoeditor
 
 import android.Manifest
+import android.app.Activity
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -13,15 +15,17 @@ private val permissionList = arrayOf(
 
 private const val MY_PERMISSION_REQUEST_CODE = 1001
 
+lateinit var currentImage : Bitmap
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        requestPermissions()
+        requestPermissions(this)
     }
+}
 
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(this, permissionList, MY_PERMISSION_REQUEST_CODE)
-    }
+fun requestPermissions(activity : Activity) {
+    ActivityCompat.requestPermissions(activity, permissionList, MY_PERMISSION_REQUEST_CODE)
 }

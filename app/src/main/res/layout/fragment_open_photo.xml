@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpenPhotoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/openFileLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHeight_percent="0.5">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            style="@style/OpenFileTheme"
+
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintBottom_toBottomOf="@id/openFileLayout"
+            app:layout_constraintEnd_toEndOf="@id/openFileLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/openFileLayout"
+            app:layout_constraintTop_toTopOf="@id/openFileLayout"
+            app:layout_constraintVertical_bias="0.45"
+            app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/OpenFileTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/openPhoto"
+            android:textSize="25sp"
+
+            app:layout_constraintBottom_toBottomOf="@id/openFileLayout"
+            app:layout_constraintEnd_toEndOf="@id/openFileLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/openFileLayout"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintWidth_percent="0.9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/openCameraLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintHeight_percent="0.5">
+
+        <ImageView
+            android:id="@+id/imageCameraView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            style="@style/OpenFileTheme"
+
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintBottom_toBottomOf="@id/openCameraLayout"
+            app:layout_constraintEnd_toEndOf="@id/openCameraLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/openCameraLayout"
+            app:layout_constraintTop_toTopOf="@id/openCameraLayout"
+            app:layout_constraintVertical_bias="0.45"
+            app:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+        <TextView
+            android:id="@+id/textCameraView"
+            style="@style/OpenFileTheme"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/useCamera"
+            android:textSize="25sp"
+
+            app:layout_constraintBottom_toBottomOf="@id/openCameraLayout"
+            app:layout_constraintEnd_toEndOf="@id/openCameraLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@id/openCameraLayout"
+            app:layout_constraintTop_toBottomOf="@+id/imageCameraView"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintWidth_percent="0.9" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
