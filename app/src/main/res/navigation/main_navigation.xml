@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_imageRotationFragment_to_photoEditorFragment"
             app:destination="@id/photoEditorFragment" />
-        <action
-            android:id="@+id/action_imageRotationFragment_to_photoEditorFragment2"
-            app:destination="@id/photoEditorFragment" />
     </fragment>
 
     <fragment
