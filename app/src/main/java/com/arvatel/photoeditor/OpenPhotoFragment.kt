@@ -23,15 +23,15 @@ class OpenPhotoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_open_photo, container, false)
 
         val context : Context = requireContext()
-        val activity : Activity = requireActivity()
+        val activity : MainActivity = requireActivity() as MainActivity
 
         view.openFileLayout.setOnClickListener {
             if (PermissionChecker.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) ==
                 PermissionChecker.PERMISSION_DENIED) {
-                requestPermissions(activity)
+                activity.requestPermissions() // сделать нормально
             }
             else {
-                currentImage = resources.getDrawable(R.drawable.ic_launcher_foreground).toBitmap()
+                activity.currentImage = resources.getDrawable(R.drawable.ic_launcher_foreground, null).toBitmap()
                 Navigation.findNavController(view)
                     .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
             }
@@ -40,10 +40,10 @@ class OpenPhotoFragment : Fragment() {
         view.openCameraLayout.setOnClickListener {
             if (PermissionChecker.checkSelfPermission(context, Manifest.permission.CAMERA) ==
                 PermissionChecker.PERMISSION_DENIED) {
-                requestPermissions(activity)
+                activity.requestPermissions() // сделать нормально
             }
             else {
-                currentImage = resources.getDrawable(R.drawable.new_picture).toBitmap()
+                activity.currentImage = resources.getDrawable(R.drawable.new_picture, null).toBitmap()
                 Navigation.findNavController(view)
                     .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
             }

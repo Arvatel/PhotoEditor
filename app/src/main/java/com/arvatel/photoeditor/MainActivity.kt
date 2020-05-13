@@ -15,17 +15,21 @@ private val permissionList = arrayOf(
 
 private const val MY_PERMISSION_REQUEST_CODE = 1001
 
-lateinit var currentImage : Bitmap
-
 class MainActivity : AppCompatActivity() {
+
+    lateinit var currentImage : Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        requestPermissions(this)
+        requestPermissions()
     }
+
+    fun requestPermissions() {
+        ActivityCompat.requestPermissions(this, permissionList, MY_PERMISSION_REQUEST_CODE)
+    }
+
+
 }
 
-fun requestPermissions(activity : Activity) {
-    ActivityCompat.requestPermissions(activity, permissionList, MY_PERMISSION_REQUEST_CODE)
-}
+
