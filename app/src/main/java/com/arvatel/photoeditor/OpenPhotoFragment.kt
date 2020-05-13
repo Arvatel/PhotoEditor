@@ -10,8 +10,6 @@ import kotlinx.android.synthetic.main.fragment_open_photo.view.*
 import android.Manifest
 import android.app.Activity
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory.decodeResource
 import androidx.core.content.PermissionChecker
 import androidx.core.graphics.drawable.toBitmap
 
@@ -32,8 +30,11 @@ class OpenPhotoFragment : Fragment() {
                 PermissionChecker.PERMISSION_DENIED) {
                 requestPermissions(activity)
             }
-            currentImage = resources.getDrawable(R.drawable.ic_launcher_foreground).toBitmap()
-            Navigation.findNavController(view).navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
+            else {
+                currentImage = resources.getDrawable(R.drawable.ic_launcher_foreground).toBitmap()
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
+            }
         }
 
         view.openCameraLayout.setOnClickListener {
@@ -41,8 +42,11 @@ class OpenPhotoFragment : Fragment() {
                 PermissionChecker.PERMISSION_DENIED) {
                 requestPermissions(activity)
             }
-            currentImage = resources.getDrawable(R.drawable.new_picture).toBitmap()
-            Navigation.findNavController(view).navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
+            else {
+                currentImage = resources.getDrawable(R.drawable.new_picture).toBitmap()
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
+            }
         }
         return view
     }
