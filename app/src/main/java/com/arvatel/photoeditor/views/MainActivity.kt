@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         filtersBV.setOnClickListener { v -> startFragment(v) }
         scalingBV.setOnClickListener { v -> startFragment(v) }
         opencvBV.setOnClickListener { v -> startFragment(v) }
+
     }
 
     private fun startFragment(view: View) {

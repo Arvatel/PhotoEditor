@@ -1,18 +1,93 @@
 package com.arvatel.photoeditor.algorithms;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
+
+import androidx.loader.content.Loader;
+
+import com.arvatel.photoeditor.R;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OpenCvUtil {
+
+    private static CascadeClassifier initializeOpenCVDependencies(Context context) {
+        CascadeClassifier cascadeClassifier = new CascadeClassifier();
+
+        try {
+            // Copy the resource into a temp file so OpenCV can load it
+            InputStream is = context.getResources().openRawResource(R.raw.haarcascade_frontalface_alt);
+            File cascadeDir = context.getDir("cascade", Context.MODE_PRIVATE);
+            File mCascadeFile = new File(cascadeDir, "lbpcascade_frontalface.xml");
+            FileOutputStream os = new FileOutputStream(mCascadeFile);
+
+
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = is.read(buffer)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            is.close();
+            os.close();
+
+            // Load the cascade classifier
+            cascadeClassifier = new CascadeClassifier(mCascadeFile.getAbsolutePath());
+        } catch (Exception e) {
+            Log.e("OpenCVActivity", "Error loading cascade", e);
+        }
+
+        return cascadeClassifier;
+    }
+
+    public static Bitmap searchForFaces(Bitmap imageBitmap, Context context) {
+        // Face detector creation by loading source cascade xml file
+        // using CascadeClassifier.
+        // the file can be downloade from
+        // https://github.com/opencv/opencv/blob/master/data/haarcascades/
+        // haarcascade_frontalface_alt.xml
+        // and must be placed in same directory of the source java file
+        CascadeClassifier faceDetector  = initializeOpenCVDependencies(context);
+
+
+        // Input image
+        Mat image = new Mat();
+        Utils.bitmapToMat(imageBitmap, image);
+
+        // Detecting faces
+        MatOfRect faceDetections = new MatOfRect();
+        faceDetector.detectMultiScale(image, faceDetections);
+
+        // Creating a rectangular box showing faces detected
+        for (Rect rect : faceDetections.toArray()) {
+            Imgproc.rectangle(image, new Point(rect.x, rect.y),
+                    new Point(rect.x + rect.width, rect.y + rect.height),
+                    new Scalar(0, 255, 0));
+        }
+
+        Bitmap b = Bitmap.createBitmap(imageBitmap);
+        //Converting Mat back to Bitmap
+        Utils.matToBitmap(image, b);
+        return b;
+
+    }
     public static Bitmap searchForShapes(Bitmap imageBitmap) {
 
         //convert to Mat: represents an n-dimensional dense numerical single-channel or multi-channel array
