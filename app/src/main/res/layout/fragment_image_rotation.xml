@@ -7,9 +7,8 @@
     tools:context=".ImageRotationFragment">
 
     <ImageView
-        android:id="@+id/rotationPhoto"
+        android:id="@+id/showImageRotate"
         style="@style/ShowPhotoStyle"
-        android:src="@drawable/picture"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/rotationBar"
@@ -21,8 +20,8 @@
         android:id="@+id/rotationBar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:max="360"
-        android:progress="180"
+        android:max="90"
+        android:progress="45"
         app:layout_constraintBottom_toTopOf="@+id/toolBarRotation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

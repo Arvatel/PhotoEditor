@@ -6,18 +6,24 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.arvatel.photoeditor.interfaces.ImageInterface
 
-private val permissionList = arrayOf(
-    Manifest.permission.CAMERA,
-    Manifest.permission.READ_EXTERNAL_STORAGE,
-    Manifest.permission.WRITE_EXTERNAL_STORAGE
-)
+interface StorageInterface {
+    fun getImage() : Bitmap
+    fun setImage(image : Bitmap)
+}
 
-private const val MY_PERMISSION_REQUEST_CODE = 1001
+class MainActivity : AppCompatActivity(), StorageInterface {
 
-class MainActivity : AppCompatActivity() {
+    private lateinit var currentImage : Bitmap
 
-    lateinit var currentImage : Bitmap
+    override fun getImage() : Bitmap {
+        return currentImage
+    }
+
+    override fun setImage(image: Bitmap) {
+        currentImage = image
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +31,19 @@ class MainActivity : AppCompatActivity() {
         requestPermissions()
     }
 
-    fun requestPermissions() {
+    private fun requestPermissions() {
         ActivityCompat.requestPermissions(this, permissionList, MY_PERMISSION_REQUEST_CODE)
     }
 
+    companion object{
+        private val permissionList = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+        )
 
+        private const val MY_PERMISSION_REQUEST_CODE = 1001
+    }
 }
 
 

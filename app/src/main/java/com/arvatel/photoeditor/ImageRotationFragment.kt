@@ -12,18 +12,6 @@ import androidx.navigation.Navigation
 import com.arvatel.photoeditor.algorithms.Rotate
 import kotlinx.android.synthetic.main.fragment_image_rotation.view.*
 
-private class SeekBarListener(val activity : MainActivity, val view: View) : SeekBar.OnSeekBarChangeListener {
-
-    override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-        var tempImage : Bitmap = Rotate.rotate(activity.currentImage, Math.toRadians((progress - 180).toDouble()))
-        view.rotationPhoto.setImageBitmap(tempImage)
-    }
-    override fun onStartTrackingTouch(seekBar: SeekBar?) {
-    }
-
-    override fun onStopTrackingTouch(seekBar: SeekBar?) {
-    }
-}
 
 class ImageRotationFragment : Fragment() {
 
@@ -31,17 +19,37 @@ class ImageRotationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val activity : MainActivity = requireActivity() as MainActivity
         val view = inflater.inflate(R.layout.fragment_image_rotation, container, false)
+
+        view.showImageRotate.setImageBitmap((activity as StorageInterface).getImage())
 
         view.buttonCancel.setOnClickListener{
             Navigation.findNavController(view).navigate(R.id.action_imageRotationFragment_to_photoEditorFragment)
         }
+
         view.buttonApply.setOnClickListener{
-            activity.currentImage = Rotate.rotate(activity.currentImage, Math.toRadians((view.rotationBar.progress - 180).toDouble()))
+            (activity as StorageInterface).setImage(
+                Rotate.rotate((activity as StorageInterface).getImage(), Math.toRadians((view.rotationBar.progress - 45).toDouble())))
+
             Navigation.findNavController(view).navigate(R.id.action_imageRotationFragment_to_photoEditorFragment)
         }
-        view.rotationBar.setOnSeekBarChangeListener(SeekBarListener(activity, view))
+
+        view.rotationBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                var tempImage : Bitmap = Rotate.rotate((activity as StorageInterface).getImage(),
+                    Math.toRadians((progress - 45).toDouble()))
+
+                view.showImageRotate.setImageBitmap(tempImage)
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        view.buttonRotate.setOnClickListener {
+            val tempImage : Bitmap = Rotate.rotate((activity as StorageInterface).getImage())
+
+        }
 
 
         return view
