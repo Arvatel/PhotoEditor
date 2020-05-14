@@ -52,7 +52,11 @@
         android:id="@+id/imageScalingFragment"
         android:name="com.arvatel.photoeditor.ImageScalingFragment"
         android:label="fragment_image_scaling"
-        tools:layout="@layout/fragment_image_scaling" />
+        tools:layout="@layout/fragment_image_scaling" >
+        <action
+            android:id="@+id/action_imageScalingFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/openPhotoFragment"
         android:name="com.arvatel.photoeditor.OpenPhotoFragment"

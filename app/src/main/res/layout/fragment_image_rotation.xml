@@ -22,6 +22,7 @@
         android:layout_height="60dp"
         android:max="90"
         android:progress="45"
+        style="@style/SeekBarStyle"
         app:layout_constraintBottom_toTopOf="@+id/toolBarRotation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
