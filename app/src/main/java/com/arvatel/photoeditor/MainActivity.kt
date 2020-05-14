@@ -1,28 +1,34 @@
 package com.arvatel.photoeditor
 
 import android.Manifest
-import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.arvatel.photoeditor.interfaces.ImageInterface
 
 interface ImageFromActivityInterface {
     fun getImage() : Bitmap
     fun setImage(image : Bitmap)
+    fun getTempImage() : Bitmap
+    fun setTempImage(image : Bitmap)
 }
 
 class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
 
     private lateinit var currentImage : Bitmap
+    private lateinit var tempImage : Bitmap
 
     override fun getImage() : Bitmap {
         return currentImage
     }
-
     override fun setImage(image: Bitmap) {
         currentImage = image
+    }
+    override fun getTempImage() : Bitmap {
+        return tempImage
+    }
+    override fun setTempImage(image: Bitmap) {
+        tempImage = image
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

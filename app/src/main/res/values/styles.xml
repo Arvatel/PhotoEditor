@@ -25,6 +25,10 @@
         <item name="android:layout_marginEnd">8dp</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="ShowPhotoStyle.Scaling" parent="ShowPhotoStyle">
         <item name="android:scaleType">centerInside</item>
     </style>
 

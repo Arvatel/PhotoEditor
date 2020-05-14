@@ -10,7 +10,7 @@
         android:id="@+id/showImageScaling"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        style="@style/ShowPhotoStyle"
+        style="@style/ShowPhotoStyle.Scaling"
         app:layout_constraintBottom_toTopOf="@id/seekBarHeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

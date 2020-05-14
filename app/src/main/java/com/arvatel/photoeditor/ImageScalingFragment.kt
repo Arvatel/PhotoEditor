@@ -24,7 +24,6 @@ class ImageScalingFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_image_scaling, container, false)
 
-
         view.showImageScaling.setImageBitmap((activity as ImageFromActivityInterface).getImage())
 
         view.seekBarHeight.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {

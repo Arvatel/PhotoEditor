@@ -36,37 +36,25 @@
             android:text="@string/textExport" />
     </LinearLayout>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/photoPlace"
+    <ImageView
+        android:id="@+id/showImage"
+        style="@style/ShowPhotoStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/photoEditorToolBar"
+        android:layout_gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/toolsFragment"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/showImage"
-                style="@style/ShowPhotoStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical" />
-
-        </androidx.core.widget.NestedScrollView>
-
-        <fragment
-            android:id="@+id/toolsFragment"
-            android:name="com.arvatel.photoeditor.BottomSheetToolFragment"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            app:behavior_hideable="false"
-            app:behavior_peekHeight="120dp" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <fragment
+        android:id="@+id/toolsFragment"
+        android:name="com.arvatel.photoeditor.BottomSheetToolFragment"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:behavior_peekHeight="120dp"
+        app:layout_constraintBottom_toTopOf="@id/photoEditorToolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
