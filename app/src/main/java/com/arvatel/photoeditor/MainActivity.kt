@@ -8,12 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.arvatel.photoeditor.interfaces.ImageInterface
 
-interface StorageInterface {
+interface ImageFromActivityInterface {
     fun getImage() : Bitmap
     fun setImage(image : Bitmap)
 }
 
-class MainActivity : AppCompatActivity(), StorageInterface {
+class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
 
     private lateinit var currentImage : Bitmap
 

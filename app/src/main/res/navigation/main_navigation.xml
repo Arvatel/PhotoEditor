@@ -38,7 +38,11 @@
         android:id="@+id/retouchImageFragment"
         android:name="com.arvatel.photoeditor.RetouchImageFragment"
         android:label="fragment_retouch_image"
-        tools:layout="@layout/fragment_retouch_image" />
+        tools:layout="@layout/fragment_retouch_image" >
+        <action
+            android:id="@+id/action_retouchImageFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/filterFragment"
         android:name="com.arvatel.photoeditor.FilterFragment"

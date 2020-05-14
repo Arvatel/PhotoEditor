@@ -30,7 +30,7 @@ class OpenPhotoFragment : Fragment() {
                     arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), MY_PERMISSION_REQUEST_CODE)
             }
             else {
-                (activity as StorageInterface).setImage(resources.getDrawable(R.drawable.ic_launcher_foreground, null).toBitmap())
+                (activity as ImageFromActivityInterface).setImage(resources.getDrawable(R.drawable.ic_launcher_foreground, null).toBitmap())
                 Navigation.findNavController(view)
                     .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
             }
@@ -43,7 +43,7 @@ class OpenPhotoFragment : Fragment() {
                     arrayOf(Manifest.permission.CAMERA), MY_PERMISSION_REQUEST_CODE)
             }
             else {
-                (activity as StorageInterface).setImage(resources.getDrawable(R.drawable.new_picture, null).toBitmap())
+                (activity as ImageFromActivityInterface).setImage(resources.getDrawable(R.drawable.new_picture, null).toBitmap())
                 Navigation.findNavController(view)
                     .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
             }

@@ -11,7 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/new_picture"
-        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/ShowPhotoStyle"
+        app:layout_constraintBottom_toTopOf="@id/toolBarStyles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,22 +26,23 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/buttonApplyRetouch"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/apply" />
-
-        <Button
             android:id="@+id/buttonCancelRetouch"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/buttonApplyRetouch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/apply" />
     </LinearLayout>
 
     <LinearLayout
         style="@style/ToolBarStyle"
+        android:id="@+id/toolBarStyles"
         app:layout_constraintBottom_toTopOf="@id/toolBarRetouch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
