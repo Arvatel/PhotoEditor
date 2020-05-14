@@ -46,14 +46,9 @@ class ImageRotationFragment : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        view.buttonRotate.setOnClickListener {
-            val tempImage : Bitmap = Rotate.rotate((activity as ImageFromActivityInterface).getImage())
-
-        }
-
-
+//        view.buttonRotate.setOnClickListener {
+//            val tempImage : Bitmap = Rotate.rotate((activity as ImageFromActivityInterface).getImage())
+//        }
         return view
     }
-
-
 }

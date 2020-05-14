@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:src="@drawable/new_picture"
         style="@style/ShowPhotoStyle"
-        app:layout_constraintBottom_toTopOf="@id/toolBarStyles"
+        app:layout_constraintBottom_toTopOf="@id/toolBarRetouch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,43 +39,5 @@
             android:layout_weight="1"
             android:text="@string/apply" />
     </LinearLayout>
-
-    <LinearLayout
-        style="@style/ToolBarStyle"
-        android:id="@+id/toolBarStyles"
-        app:layout_constraintBottom_toTopOf="@id/toolBarRetouch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/buttonSepia"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/sepia" />
-
-        <Button
-            android:id="@+id/buttonGrey"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/grey" />
-
-        <Button
-            android:id="@+id/buttonSketch"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/sketch" />
-
-        <Button
-            android:id="@+id/buttonBonus"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/bonus" />
-    </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

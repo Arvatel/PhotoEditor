@@ -55,7 +55,7 @@ class ImageScalingFragment : Fragment() {
                 seekBarWidth.progress, seekBarHeight.progress))
             Navigation.findNavController(view).navigate(R.id.action_imageScalingFragment_to_photoEditorFragment)
         }
-        view.buttonCancel.setOnClickListener {
+        view.buttonCancelScaling.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_imageScalingFragment_to_photoEditorFragment)
         }
         return view

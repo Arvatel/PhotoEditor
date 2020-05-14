@@ -18,6 +18,7 @@ class RetouchImageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_retouch_image, container, false)
+
         var tempImage : Bitmap = (activity as ImageFromActivityInterface).getImage()
 
         view.showImageRetouch.setImageBitmap((activity as ImageFromActivityInterface).getImage())
@@ -30,26 +31,6 @@ class RetouchImageFragment : Fragment() {
         view.buttonCancelRetouch.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_retouchImageFragment_to_photoEditorFragment)
         }
-
-        view.buttonSepia.setOnClickListener {
-            tempImage = applySepiaFilter((activity as ImageFromActivityInterface).getImage())
-            view.showImageRetouch.setImageBitmap(tempImage)
-        }
-
-        view.buttonGrey.setOnClickListener {
-            tempImage = applyGreyFilter((activity as ImageFromActivityInterface).getImage())
-            view.showImageRetouch.setImageBitmap(tempImage)
-        }
-
-        view.buttonSketch.setOnClickListener {
-            tempImage = applySketchFilter((activity as ImageFromActivityInterface).getImage())
-            view.showImageRetouch.setImageBitmap(tempImage)
-        }
-
-//        view.buttonBonus.setOnClickListener {
-//            tempImage = applyCircularFilter((activity as ImageFromActivityInterface).getImage())
-//            view.showImageRetouch.setImageBitmap(tempImage)
-//        }
 
         return view
     }
