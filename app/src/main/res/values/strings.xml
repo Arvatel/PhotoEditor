@@ -10,5 +10,9 @@
     <string name="cancel">Cancel</string>
     <string name="rotate">Rotate</string>
     <string name="apply">Apply</string>
+    <string name="sepia">Sepia</string>
+    <string name="grey">Grey</string>
+    <string name="sketch">Sketch</string>
+    <string name="bonus">Bonus</string>
 
 </resources>
