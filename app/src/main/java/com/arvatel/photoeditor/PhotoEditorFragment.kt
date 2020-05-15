@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_tool.view.*
 import kotlinx.android.synthetic.main.fragment_photo_editor.view.*
+import BottomSheet
 
 
 class PhotoEditorFragment : Fragment() {
@@ -33,6 +34,10 @@ class PhotoEditorFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_filterFragment)
         }
 
+        view.buttonTools.setOnClickListener{
+            BottomSheet.showDialog(view)
+           // bottomsheetdialog.showDialog(view)
+        }
         return view
     }
 
