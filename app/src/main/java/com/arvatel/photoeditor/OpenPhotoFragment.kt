@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -59,8 +60,12 @@ class OpenPhotoFragment : Fragment() {
     }
 
     private fun openCamera() {
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent, CAMERA_REQUEST)
+        val packageManager : PackageManager = (activity as MainActivity).packageManager
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -71,6 +76,7 @@ class OpenPhotoFragment : Fragment() {
                     val imageUri : Uri? = data?.data
                     (activity as ImageFromActivityInterface).setImage(
                         MediaStore.Images.Media.getBitmap((activity as Context).contentResolver, imageUri))
+
                     Navigation.findNavController(view as View)
                         .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
                 }
@@ -78,8 +84,8 @@ class OpenPhotoFragment : Fragment() {
                     e.printStackTrace()
                 }
             }
-            CAMERA_REQUEST -> if (resultCode == RESULT_OK) {
-                (activity as ImageFromActivityInterface).setImage(data!!.extras!!["data"] as Bitmap)
+            REQUEST_IMAGE_CAPTURE -> if (resultCode == RESULT_OK) {
+                (activity as ImageFromActivityInterface).setImage(data?.extras?.get("data") as Bitmap)
                 Navigation.findNavController(view as View)
                     .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
             }
@@ -89,6 +95,6 @@ class OpenPhotoFragment : Fragment() {
     companion object {
         private const val MY_PERMISSION_REQUEST_CODE = 1001
         private const val PICK_IMAGE_CODE : Int = 1002
-        private const val CAMERA_REQUEST : Int = 1003
+        private const val REQUEST_IMAGE_CAPTURE : Int = 1003
     }
 }

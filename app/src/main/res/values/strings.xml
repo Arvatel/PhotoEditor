@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PhotoEditor</string>
-    <string name="openPhoto">Нажмите в любом месте, чтобы открыть фото</string>
+    <string name="openPhoto">Нажмите чтобы открыть фото</string>
     <string name="useCamera">Нажмите чтобы сделать фото</string>
 
     <string name="hello_blank_fragment">hello</string>
