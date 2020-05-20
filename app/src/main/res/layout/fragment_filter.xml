@@ -30,14 +30,16 @@ android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            style="@style/ButtonsDark"/>
 
         <Button
             android:id="@+id/buttonApplyFilter"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/apply" />
+            android:text="@string/apply"
+            style="@style/ButtonsDark"/>
     </LinearLayout>
 
     <LinearLayout
@@ -52,28 +54,32 @@ android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/sepia" />
+            android:text="@string/sepia"
+            style="@style/ButtonsLight"/>
 
         <Button
             android:id="@+id/buttonGrey"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/grey" />
+            android:text="@string/grey"
+            style="@style/ButtonsLight"/>
 
         <Button
             android:id="@+id/buttonSketch"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/sketch" />
+            android:text="@string/sketch"
+            style="@style/ButtonsLight"/>
 
         <Button
             android:id="@+id/buttonBonus"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/bonus" />
+            android:text="@string/bonus"
+            style="@style/ButtonsLight"/>
     </LinearLayout>
 
 
