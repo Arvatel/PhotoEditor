@@ -10,10 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.arvatel.photoeditor.R
-import com.arvatel.photoeditor.views.fragments.FragmentFilter
-import com.arvatel.photoeditor.views.fragments.FragmentOpenCv
-import com.arvatel.photoeditor.views.fragments.FragmentRotation
-import com.arvatel.photoeditor.views.fragments.FragmentScale
+import com.arvatel.photoeditor.views.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -28,10 +25,11 @@ class MainActivity : AppCompatActivity() {
         filtersBV.setOnClickListener { v -> startFragment(v) }
         scalingBV.setOnClickListener { v -> startFragment(v) }
         opencvBV.setOnClickListener { v -> startFragment(v) }
-
+        splinesBV.setOnClickListener { v -> startFragment(v) }
     }
 
     private fun startFragment(view: View) {
+
         view as Button
         //extract the photo from the image view to send it to the fragment
         imageView.invalidate()
@@ -42,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 opencvBV -> FragmentOpenCv.newInstance(bitmap)
                 filtersBV -> FragmentFilter.newInstance(bitmap)
                 rotationBV -> FragmentRotation.newInstance(bitmap)
+                splinesBV -> FragmentSplines.newInstance(bitmap)
                 else -> FragmentScale.newInstance(bitmap)
             }
 

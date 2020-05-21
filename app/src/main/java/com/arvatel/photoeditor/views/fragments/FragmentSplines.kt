@@ -1,27 +1,21 @@
 package com.arvatel.photoeditor.views.fragments
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.arvatel.photoeditor.R
-import com.arvatel.photoeditor.algorithms.OpenCvUtil
 import com.arvatel.photoeditor.views.MainActivity
-import kotlinx.android.synthetic.main.fragment_opencv.*
-import org.opencv.android.OpenCVLoader
-import org.opencv.objdetect.CascadeClassifier
-import java.io.File
-import java.io.FileOutputStream
+import kotlinx.android.synthetic.main.fragment_splines.*
 
 
 private const val PHOTO_BITMAP = "photoBitmap"
 
 
-class FragmentOpenCv : Fragment() {
+class FragmentSplines : Fragment() {
     lateinit var bitmap: Bitmap
 
 
@@ -29,7 +23,6 @@ class FragmentOpenCv : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             bitmap = it.getParcelable(PHOTO_BITMAP)!!
-            bitmap = bitmap.copy(bitmap.config, true)//create copy of the original one not to modify the original one
         }
     }
 
@@ -38,35 +31,42 @@ class FragmentOpenCv : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_opencv, container, false)
+        return inflater.inflate(R.layout.fragment_splines, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
 
-        OpenCVLoader.initDebug()
-        findfacesBV.setOnClickListener{findfaces()}
-        findshapesBV.setOnClickListener{findshapes()}
-        opencvImageView.setImageBitmap(bitmap)
-
+        splinesFinishBV.setOnClickListener { finishFragment() }
+        splinesClearBV.setOnClickListener {
+            (activity as MainActivity).closeFragment(this)
+        }
+        drawLineBV.setOnClickListener { v -> callOnDraw(v) }
+        drawCubicSplineBV.setOnClickListener { v -> callOnDraw(v) }
+        splinesClearBV.setOnClickListener{clean()   }
     }
 
-    private fun findshapes() {
-        bitmap = OpenCvUtil.searchForShapes(bitmap)
-        opencvImageView.setImageBitmap(bitmap)
+    private fun callOnDraw(view: View) {
+        when (view as Button) {
+            drawLineBV -> splinesIV.callOnDraw(false, true)
+            drawCubicSplineBV -> splinesIV.callOnDraw(true, false)
+        }
+    }
+    private fun clean(){
+        splinesIV.clean()
+    }
+    //todo save image
+    private fun finishFragment() {
+        (activity as MainActivity).closeFragment(this)
+//        (activity as MainActivity).showTheNewImage(filterFragmentImageView.drawable.toBitmap())
     }
 
-    private fun findfaces() {
-        bitmap = OpenCvUtil.searchForFaces(bitmap,
-            (activity as MainActivity))
-        opencvImageView.setImageBitmap(bitmap)
-    }
 
     companion object {
         @JvmStatic
         fun newInstance(bitmap: Bitmap) =
-            FragmentOpenCv().apply {
+            FragmentSplines().apply {
                 arguments = Bundle().apply {
                     putParcelable(PHOTO_BITMAP, bitmap)
                 }

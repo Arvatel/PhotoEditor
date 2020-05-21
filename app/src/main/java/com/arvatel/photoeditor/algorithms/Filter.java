@@ -158,8 +158,8 @@ public class Filter {
         //k- starting row index, m- ending row index, l- starting column index, n- ending column index
         //i - iterator
         //
-        int height = oldBitmap.getHeight();
-        int width = oldBitmap.getWidth();
+        int height = oldBitmap.getWidth();
+        int width = oldBitmap.getHeight();
         while (k < height && l < width) {
         /* Print the first row from
                the remaining rows */

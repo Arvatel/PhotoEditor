@@ -20,7 +20,7 @@ public class Scaling {
         }
         return newImage;
     }
-    public     static Bitmap nearestNeighborScalingRatio(Bitmap oldImage, double ratio) {
+    public static Bitmap nearestNeighborScalingRatio(Bitmap oldImage, double ratio) {
         int newWidth = ((Double) (oldImage.getWidth() * ratio)).intValue();
         int newHeight = ((Double) (oldImage.getHeight() * ratio)).intValue();
         Bitmap newImage = Bitmap.createBitmap(newWidth, newHeight, oldImage.getConfig());
