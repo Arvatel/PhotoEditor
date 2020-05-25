@@ -14,5 +14,12 @@
     <string name="grey">Grey</string>
     <string name="sketch">Sketch</string>
     <string name="bonus">Bonus</string>
+    <string name="choose_your_way">Choose your way</string>
+    <string name="cube">Cube</string>
+    <string name="spline_lines">Spline Lines</string>
+    <string name="photo_editor">Photo editor</string>
+    <string name="line">Line</string>
+    <string name="cubic">cubic</string>
+    <string name="clean">Clean</string>
 
 </resources>

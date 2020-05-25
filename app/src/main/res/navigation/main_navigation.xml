@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainNavigation"
-    app:startDestination="@id/openPhotoFragment">
+    app:startDestination="@id/menuFragment">
 
     <fragment
         android:id="@+id/imageRotationFragment"
@@ -69,5 +69,26 @@
         <action
             android:id="@+id/action_openPhotoFragment_to_photoEditorFragment"
             app:destination="@id/photoEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.arvatel.photoeditor.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_openPhotoFragment"
+            app:destination="@id/openPhotoFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_splineFragment"
+            app:destination="@id/splineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splineFragment"
+        android:name="com.arvatel.photoeditor.SplineFragment"
+        android:label="fragment_spline"
+        tools:layout="@layout/fragment_spline" >
+        <action
+            android:id="@+id/action_splineFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>
