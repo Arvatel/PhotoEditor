@@ -40,7 +40,9 @@ class PhotoEditorFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_filterFragment)
         }
         view.buttonExport.setOnClickListener {
-
+            val w = (activity as ImageFromActivityInterface).getMainImage().width
+            val h = (activity as ImageFromActivityInterface).getMainImage().height
+            Toast.makeText(activity, "size: " + w.toString() + "x" + h.toString(), Toast.LENGTH_LONG).show()
         }
 
         return view

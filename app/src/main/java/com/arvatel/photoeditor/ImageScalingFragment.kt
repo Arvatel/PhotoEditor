@@ -26,6 +26,11 @@ class ImageScalingFragment : Fragment() {
 
         view.showImageScaling.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
 
+        view.seekBarWidth.max = (activity as ImageFromActivityInterface).getMainImage().width
+        view.seekBarHeight.max = (activity as ImageFromActivityInterface).getMainImage().height
+        view.seekBarWidth.progress = view.seekBarWidth.max / 2
+        view.seekBarHeight.progress = view.seekBarHeight.max / 2
+
         view.seekBarHeight.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
