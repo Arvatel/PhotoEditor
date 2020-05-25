@@ -3,6 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorBackground">#C1C1C1</color>
+    <color name="colorBackground">#E1E1E1</color>
     <color name="colorTextOF">#737373</color>
+    <color name="colorStatusBar">#FFA12600</color>
+    <color name="colorOrange">#FF710B</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

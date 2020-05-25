@@ -24,12 +24,12 @@ class ImageScalingFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_image_scaling, container, false)
 
-        view.showImageScaling.setImageBitmap((activity as ImageFromActivityInterface).getImage())
+        view.showImageScaling.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
 
         view.seekBarHeight.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                var tempImage : Bitmap = Scaling.nearestNeighborScaling((activity as ImageFromActivityInterface).getImage(),
+                var tempImage : Bitmap = Scaling.nearestNeighborScaling((activity as ImageFromActivityInterface).getTempImage(),
                 seekBarWidth.progress, seekBarHeight.progress)
 
                 view.showImageScaling.setImageBitmap(tempImage)
@@ -41,7 +41,7 @@ class ImageScalingFragment : Fragment() {
         view.seekBarWidth.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                var tempImage : Bitmap = Scaling.nearestNeighborScaling((activity as ImageFromActivityInterface).getImage(),
+                var tempImage : Bitmap = Scaling.nearestNeighborScaling((activity as ImageFromActivityInterface).getTempImage(),
                     seekBarWidth.progress, seekBarHeight.progress)
 
                 view.showImageScaling.setImageBitmap(tempImage)
@@ -50,8 +50,13 @@ class ImageScalingFragment : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
         view.buttonApplyScaling.setOnClickListener {
-            (activity as ImageFromActivityInterface).setImage(Scaling.nearestNeighborScaling((activity as ImageFromActivityInterface).getImage(),
-                seekBarWidth.progress, seekBarHeight.progress))
+            var image : Bitmap = Scaling.nearestNeighborScaling((activity as ImageFromActivityInterface).getMainImage(),
+                seekBarWidth.progress, seekBarHeight.progress)
+            (activity as ImageFromActivityInterface).setMainImage(image)
+
+            (activity as ImageFromActivityInterface).setTempImage(
+                (activity as ImageFromActivityInterface).resizeImage(image))
+
             Navigation.findNavController(view).navigate(R.id.action_imageScalingFragment_to_photoEditorFragment)
         }
         view.buttonCancelScaling.setOnClickListener {

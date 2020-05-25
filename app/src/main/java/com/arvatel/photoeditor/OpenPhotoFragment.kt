@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Bitmap.createScaledBitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -74,7 +75,7 @@ class OpenPhotoFragment : Fragment() {
             PICK_IMAGE_CODE -> if (resultCode == RESULT_OK) {
                 try {
                     val imageUri : Uri? = data?.data
-                    (activity as ImageFromActivityInterface).setImage(
+                    (activity as ImageFromActivityInterface).setBothImages(
                         MediaStore.Images.Media.getBitmap((activity as Context).contentResolver, imageUri))
 
                     Navigation.findNavController(view as View)
@@ -85,7 +86,7 @@ class OpenPhotoFragment : Fragment() {
                 }
             }
             REQUEST_IMAGE_CAPTURE -> if (resultCode == RESULT_OK) {
-                (activity as ImageFromActivityInterface).setImage(data?.extras?.get("data") as Bitmap)
+                (activity as ImageFromActivityInterface).setBothImages(data?.extras?.get("data") as Bitmap)
                 Navigation.findNavController(view as View)
                     .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
             }

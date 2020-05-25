@@ -18,12 +18,23 @@ class FilterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_filter, container, false)
-        var tempImage : Bitmap = (activity as ImageFromActivityInterface).getImage()
+        var tempImage : Bitmap = (activity as ImageFromActivityInterface).getTempImage()
+        var filter : Int = 0
 
-        view.showImageFilter.setImageBitmap((activity as ImageFromActivityInterface).getImage())
+        view.showImageFilter.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
 
         view.buttonApplyFilter.setOnClickListener {
-            (activity as ImageFromActivityInterface).setImage(tempImage)
+            (activity as ImageFromActivityInterface).setTempImage(tempImage)
+            when(filter){
+                1 -> (activity as ImageFromActivityInterface).setMainImage(
+                    applySepiaFilter((activity as ImageFromActivityInterface).getMainImage()))
+                2 -> (activity as ImageFromActivityInterface).setMainImage(
+                    applyGreyFilter((activity as ImageFromActivityInterface).getMainImage()))
+                3 -> (activity as ImageFromActivityInterface).setMainImage(
+                    applySketchFilter((activity as ImageFromActivityInterface).getMainImage()))
+//                4 -> (activity as ImageFromActivityInterface).setMainImage(
+//                    applyCircularFilter((activity as ImageFromActivityInterface).getMainImage()))
+            }
             Navigation.findNavController(view).navigate(R.id.action_filterFragment_to_photoEditorFragment)
         }
 
@@ -32,22 +43,26 @@ class FilterFragment : Fragment() {
         }
 
         view.buttonSepia.setOnClickListener {
-            tempImage = applySepiaFilter((activity as ImageFromActivityInterface).getImage())
+            tempImage = applySepiaFilter((activity as ImageFromActivityInterface).getTempImage())
+            filter = 1
             view.showImageFilter.setImageBitmap(tempImage)
         }
 
         view.buttonGrey.setOnClickListener {
-            tempImage = applyGreyFilter((activity as ImageFromActivityInterface).getImage())
+            tempImage = applyGreyFilter((activity as ImageFromActivityInterface).getTempImage())
+            filter = 2
             view.showImageFilter.setImageBitmap(tempImage)
         }
 
         view.buttonSketch.setOnClickListener {
-            tempImage = applySketchFilter((activity as ImageFromActivityInterface).getImage())
+            tempImage = applySketchFilter((activity as ImageFromActivityInterface).getTempImage())
+            filter = 3
             view.showImageFilter.setImageBitmap(tempImage)
         }
 
 //        view.buttonBonus.setOnClickListener {
-//            tempImage = applyCircularFilter((activity as ImageFromActivityInterface).getImage())
+//            tempImage = applyCircularFilter((activity as ImageFromActivityInterface).getTempImage())
+//            filter = 4
 //            view.showImageFilter.setImageBitmap(tempImage)
 //        }
 

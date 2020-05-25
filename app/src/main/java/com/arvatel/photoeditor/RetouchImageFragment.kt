@@ -19,12 +19,12 @@ class RetouchImageFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_retouch_image, container, false)
 
-        var tempImage : Bitmap = (activity as ImageFromActivityInterface).getImage()
+        var tempImage : Bitmap = (activity as ImageFromActivityInterface).getTempImage()
 
-        view.showImageRetouch.setImageBitmap((activity as ImageFromActivityInterface).getImage())
+        view.showImageRetouch.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
 
         view.buttonApplyRetouch.setOnClickListener {
-            (activity as ImageFromActivityInterface).setImage(tempImage)
+//            (activity as ImageFromActivityInterface).setImage(tempImage)
             Navigation.findNavController(view).navigate(R.id.action_retouchImageFragment_to_photoEditorFragment)
         }
 
