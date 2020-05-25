@@ -3,7 +3,9 @@ package com.arvatel.photoeditor.views.fragments
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
@@ -20,6 +22,8 @@ private const val PHOTO_BITMAP = "photoBitmap"
 
 class FragmentFilter : Fragment() {
     lateinit var bitmap: Bitmap
+    var revert = true;
+    var filter: Bitmap?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,31 +51,55 @@ class FragmentFilter : Fragment() {
         applySketch.setOnClickListener{applySketchFilter()}
         speia.setOnClickListener{applyspiaFilter()}
         applyBonus.setOnClickListener{applyCircularFilter()}
+        unsharpMaskingBV.setOnClickListener{applyUnsharping()}
         filterFinishBV.setOnClickListener{finishFragment()}
         filterDiscardBV.setOnClickListener {
             (activity as MainActivity).closeFragment(this)
         }
+
+        filterFragmentImageView.setOnClickListener{
+            if(filter!=null)
+            {
+                if(revert) {
+                    filterFragmentImageView.setImageBitmap(bitmap)
+                    revert = false;
+                }
+                else{
+                    filterFragmentImageView.setImageBitmap(filter)
+                    revert =true;
+                }
+
+            }
+        }
+
+    }
+
+
+
+    private fun applyUnsharping() {
+        filter = Filter.applySharpining(bitmap)
+        filterFragmentImageView.setImageBitmap(filter)
     }
     private fun finishFragment() {
         (activity as MainActivity).closeFragment(this)
         (activity as MainActivity).showTheNewImage(filterFragmentImageView.drawable.toBitmap())
     }
     private fun applyCircularFilter(){
-        val bitmappingFilter = Filter.applyCircularFilter(bitmap)
-        filterFragmentImageView.setImageBitmap(bitmappingFilter)
+       filter = Filter.applyCircularFilter(bitmap)
+        filterFragmentImageView.setImageBitmap(filter)
     }
     private fun applyspiaFilter() {
-        val bitmapwithFilter = Filter.applySpeiaFilter(bitmap)
-        filterFragmentImageView.setImageBitmap(bitmapwithFilter)
+        filter = Filter.applySpeiaFilter(bitmap)
+        filterFragmentImageView.setImageBitmap(filter)
     }
 
     fun applySketchFilter(){
-        val bitmapwithFilter = Filter.applySketchFilter(bitmap)
-        filterFragmentImageView.setImageBitmap(bitmapwithFilter)
+        filter = Filter.applySketchFilter(bitmap)
+        filterFragmentImageView.setImageBitmap(filter)
     }
     private fun applyGreyFilter() {
-        val bitmapwithFilter = Filter.applyGreyFilter(bitmap)
-        filterFragmentImageView.setImageBitmap(bitmapwithFilter)
+        filter = Filter.applyGreyFilter(bitmap)
+        filterFragmentImageView.setImageBitmap(filter)
     }
 
     companion object {

@@ -67,8 +67,8 @@ class FragmentRotation : Fragment() {
     private fun makeThumbnail() {
         //keep the aspect ratio when make a small venison of it
         //https://eikhart.com/blog/aspect-ratio-calculator
-        val newHeight = 350 / (bitmap.width / bitmap.height)
-        thumbnail = Bitmap.createScaledBitmap(bitmap, 350, newHeight, true);
+        val newHeight = 350.0 / (bitmap.height/ bitmap.width).toDouble()
+        thumbnail = Bitmap.createScaledBitmap(bitmap, 350, newHeight.toInt(), true);
     }
 
     private fun toTheLeft() {

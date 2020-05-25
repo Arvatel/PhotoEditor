@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/filterFragmentImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="450dp"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +57,12 @@
         android:id="@+id/filterFinishBV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="finish"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/applySketch" />
+        app:layout_constraintTop_toBottomOf="@+id/applySketch"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/filterDiscardBV"
@@ -67,6 +70,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="discared"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/applySketch" />
+        app:layout_constraintTop_toBottomOf="@+id/applySketch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/unsharpMaskingBV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="unSharpMasking"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/filterFinishBV"
+        app:layout_constraintStart_toEndOf="@+id/filterDiscardBV"
+        app:layout_constraintTop_toBottomOf="@+id/applySketch"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
