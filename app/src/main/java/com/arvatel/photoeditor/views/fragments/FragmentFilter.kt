@@ -3,9 +3,7 @@ package com.arvatel.photoeditor.views.fragments
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
@@ -13,7 +11,6 @@ import com.arvatel.photoeditor.R
 import com.arvatel.photoeditor.algorithms.Filter
 import com.arvatel.photoeditor.views.MainActivity
 import kotlinx.android.synthetic.main.fragment_filter.*
-import kotlinx.android.synthetic.main.fragment_rotation.*
 
 
 private const val PHOTO_BITMAP = "photoBitmap"
@@ -53,6 +50,7 @@ class FragmentFilter : Fragment() {
         applyBonus.setOnClickListener{applyCircularFilter()}
         unsharpMaskingBV.setOnClickListener{applyUnsharping()}
         filterFinishBV.setOnClickListener{finishFragment()}
+        contrastBV.setOnClickListener { applyContrast() }
         filterDiscardBV.setOnClickListener {
             (activity as MainActivity).closeFragment(this)
         }
@@ -74,6 +72,15 @@ class FragmentFilter : Fragment() {
 
     }
 
+    private fun applyContrast() {
+        val contrastLevel: Float
+        if (contrastlevelET.text.isNotEmpty())
+            contrastLevel = contrastlevelET.text.toString().toFloat()
+        else
+            contrastLevel = 120f
+        filter = Filter.increaseContrast(bitmap, contrastLevel);
+        filterFragmentImageView.setImageBitmap(filter)
+    }
 
 
     private fun applyUnsharping() {

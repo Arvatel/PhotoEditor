@@ -3,10 +3,6 @@ package com.arvatel.photoeditor.algorithms;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
-import androidx.core.graphics.ColorUtils;
-
-import org.opencv.core.Mat;
-
 public class Filter {
      static final int HIGHEST_COLOR_VALUE = 255;
      static final int LOWEST_COLOR_VALUE = 0;
@@ -225,113 +221,56 @@ public class Filter {
         return newBitmap;
     }
 
-
-    /*********************************/
-
-
     public static Bitmap applySharpining(Bitmap oldBitmap) {//https://stackoverflow.com/questions/2938162/how-does-an-unsharp-mask-work
-        Bitmap bluredImage = getBluredImage(oldBitmap);
-        Bitmap unsharpMask = subBluredImage(bluredImage, oldBitmap);
-        Bitmap contrastedImage = increaseContrast(oldBitmap);
-        return theActualAlgorithm(oldBitmap, unsharpMask, contrastedImage);
-//        return contrastedImage;
-    }
+        Bitmap blaredImage = getBluredImage(oldBitmap);
+        Bitmap unsharpMask = subBluredImage(blaredImage, oldBitmap);
 
-    private static Bitmap theActualAlgorithm(Bitmap oldBitmap, Bitmap unsharpMask, Bitmap contrastedImage) {
         Bitmap newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
         for (int i = 0; i < oldBitmap.getWidth(); i++) {
             for (int j = 0; j < oldBitmap.getHeight(); j++) {
                 // getting each pixel
                 int unsharpMaskPixel = unsharpMask.getPixel(i, j);
-                int contrastPixel = contrastedImage.getPixel(i, j);
                 int ogriginalPixel = oldBitmap.getPixel(i, j);
-                int newPixel = getUnsharpMaskPixel(unsharpMaskPixel, contrastPixel, ogriginalPixel);
+                int newPixel = getUnsharpMaskPixel(ogriginalPixel, unsharpMaskPixel);
                 newBitmap.setPixel(i, j, newPixel);
             }
         }
         return newBitmap;
     }
 
-    private static int getUnsharpMaskPixel(int unsharpMaskPixel, int highContrast, int original) {
+    private static int getUnsharpMaskPixel(int original, int unsharpMaskPixel) {
         int unsharpRed = Color.red(unsharpMaskPixel);
         int unsharpBlue = Color.blue(unsharpMaskPixel);
         int unsharpGreen = Color.green(unsharpMaskPixel);
-        int unsharpAlpha = Color.alpha(unsharpMaskPixel);
-//        float[] unsharpHsv = new float[3];
-//        ColorUtils.RGBToHSL(unsharpRed, unsharpGreen, unsharpBlue, unsharpHsv);
-
-
-        int contRed = Color.red(highContrast);
-        int contBlue = Color.blue(highContrast);
-        int contGreen = Color.green(highContrast);
-//        float[] constHsv = new float[3];
-//        ColorUtils.RGBToHSL(contRed, contGreen, contBlue, constHsv);
 
 
         int oldRed = Color.red(original);
         int oldBlue = Color.blue(original);
         int oldGreen = Color.green(original);
         int oldAlpha = Color.alpha(original);
-//        float[] oldHsv = new float[3];
-//        ColorUtils.RGBToHSL(oldRed, oldGreen, oldBlue, oldHsv);
 
-        /***************/
-//        float difHSV = constHsv[1] - oldHsv[1];
-//        float deltaHSV = difHSV*unsharpHsv[2];
-//        if(Math.abs(deltaHSV)>=0)
-//            oldHsv[1]+=deltaHSV;
-        /***************/
+        //If the absolute val. of difference between original and blurred
+        //values are greater than the given threshold add weighed difference
+        //back to the original pixel. If the result is outside (0-255),
+        //change it back to the corresponding margin 0 or 255
+        //https://microsolutions.info/2011/09/blurring-and-unsharp-masking.html
+        float amount = 0.6f;
+        int threshold = 3;
+        if (unsharpRed >= threshold)
+            oldRed += amount * unsharpRed;
+        if (unsharpGreen >= threshold)
+            oldGreen += amount * unsharpGreen;
+        if (unsharpBlue >= threshold)
+            oldBlue += amount * unsharpBlue;
 
-        // calc luminance in range 0.0 to 1.0; using SRGB luminance constants
-        float luminance = calculateBrightness(unsharpRed, unsharpGreen, unsharpBlue);
-        //make this using hsl instead of rgp then go back
-        float diffR = contRed - oldRed;
-        float diffG = contGreen - oldGreen;
-        float diffB = contBlue - oldBlue;
-
-        float deltaR = diffR * (luminance);
-        float deltaG = diffG * (luminance);
-        float deltaB = diffB * (luminance);
-
-//        if (Math.abs(deltaR) > 0)//2
-            oldRed += deltaR;
-//        if (Math.abs(deltaG) > 0)
-            oldGreen += deltaG;
-//        if (Math.abs(deltaB) > 0)
-            oldBlue += deltaB;
-
-//        return ColorUtils.HSLToColor(oldHsv);
-        // applying new pixel values from above to newBitmap
         return Color.argb(oldAlpha, truncate(oldRed), truncate(oldGreen), truncate(oldBlue));
     }
 
-    private static float calculateBrightness(int sR, int sG, int sB) {
-
-        return (((sR + sG + sB) / 3f) / 255f) * 100;
-//        float vR = sR / 255f;
-//        float vG = sG / 255f;
-//        float vB = sB / 255f;
-//
-//        return (float) (0.2126 * sRGBtoLin(vR) + 0.7152 * sRGBtoLin(vG) + 0.0722 * sRGBtoLin(vB));
-    }
-
-//    private static float sRGBtoLin(float colorChannel) {
-//        // Send this function a decimal sRGB gamma encoded color value
-//        // between 0.0 and 1.0, and it returns a linearized value.
-//
-//        if (colorChannel <= 0.04045) {
-//            return colorChannel / 12.92f;
-//        } else {
-//            return (float) Math.pow(((colorChannel + 0.055) / 1.055f), 2.4);
-//        }
-//    }
-
-    private static Bitmap increaseContrast(Bitmap original) {
+    public static Bitmap increaseContrast(Bitmap original,float contrastLevel) {
 
         Bitmap newBitmap = original.copy(Bitmap.Config.ARGB_8888, true);
 
-        float contrastLevel = 0f;
         float f = (259f * (contrastLevel + 255f)) / (255f * (259f - contrastLevel));
 
         for (int i = 0; i < original.getWidth(); i++) {
@@ -371,9 +310,9 @@ public class Filter {
                 int pixelValueBo = Color.blue(originalPixel);
 
                 //new sharp
-                int newPixelValueR = truncate(-1 * (pixelValueR - pixelValueRo));
-                int newPixelValueG = truncate(-1 * (pixelValueG - pixelValueGo));
-                int newPixelValueB = truncate(-1 * (pixelValueB - pixelValueBo));
+                int newPixelValueR = truncate(pixelValueRo - pixelValueR);
+                int newPixelValueG = truncate(pixelValueGo - pixelValueG);
+                int newPixelValueB = truncate(pixelValueBo - pixelValueB);
 
                 int newPixel = Color.argb(Color.alpha(originalPixel), newPixelValueR, newPixelValueG, newPixelValueB);
                 newBitmap.setPixel(i, j, newPixel);

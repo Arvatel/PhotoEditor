@@ -12,6 +12,7 @@ import com.arvatel.photoeditor.R
 import com.arvatel.photoeditor.algorithms.Rotate
 import com.arvatel.photoeditor.views.MainActivity
 import kotlinx.android.synthetic.main.fragment_rotation.*
+import kotlin.math.roundToInt
 
 
 private const val PHOTO_BITMAP = "photoBitmap"
@@ -65,10 +66,18 @@ class FragmentRotation : Fragment() {
     }
 
     private fun makeThumbnail() {
-        //keep the aspect ratio when make a small venison of it
-        //https://eikhart.com/blog/aspect-ratio-calculator
-        val newHeight = 350.0 / (bitmap.height/ bitmap.width).toDouble()
-        thumbnail = Bitmap.createScaledBitmap(bitmap, 350, newHeight.toInt(), true);
+        val width = bitmap.width
+        val height = bitmap.height
+        val newHeight: Int
+        val newWidth = 480
+        thumbnail = bitmap
+        if (width > newWidth) {
+            //keep the aspect ratio when make a small venison of it
+            //https://stackoverflow.com/questions/4837715/how-to-resize-a-bitmap-in-android  answer #4
+            val aspectRatio: Float = width.toFloat() / height
+           newHeight = (newWidth / aspectRatio).roundToInt()
+            thumbnail = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        }
     }
 
     private fun toTheLeft() {

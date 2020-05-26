@@ -85,4 +85,25 @@
         app:layout_constraintStart_toEndOf="@+id/filterDiscardBV"
         app:layout_constraintTop_toBottomOf="@+id/applySketch"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/contrastBV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="contrast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/speia"
+        app:layout_constraintTop_toBottomOf="@+id/contrastlevelET" />
+
+    <EditText
+        android:id="@+id/contrastlevelET"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="enter contrast value"
+        android:inputType="numberSigned"
+        android:text="30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/applyBonus"
+        app:layout_constraintTop_toBottomOf="@+id/filterFragmentImageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
