@@ -1,23 +1,19 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorOrange</item>
+        <item name="colorPrimaryDark">@color/colorStatusBar</item>
+        <item name="colorAccent">@color/colorOrange</item>
         <item name="background">@color/colorBackground</item>
     </style>
 
     <style name="OpenFileTheme">
         <item name="android:textColor">@color/colorTextOF</item>
-
     </style>
 
     <style name="ToolBarStyle">
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_width">match_parent</item>
-    </style>
-
-    <style name="ToolBarButtonStyle">
     </style>
 
     <style name="ShowPhotoStyle">
@@ -37,15 +33,17 @@
         <item name="android:layout_marginEnd">10dp</item>
     </style>
 
-    <style name="ButtonsLight">
+    <style name="ButtonsStyle">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ButtonsLight" parent="ButtonsStyle">
         <item name="android:textColor">@color/colorOrange</item>
         <item name="android:background">@color/colorWhite</item>
         <item name="android:drawablePadding">-20dp</item>
     </style>
 
-    <style name="ButtonsDark">
-        <item name="android:textSize">14sp</item>
+    <style name="ButtonsDark" parent="ButtonsStyle">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:background">@color/colorOrange</item>
     </style>
