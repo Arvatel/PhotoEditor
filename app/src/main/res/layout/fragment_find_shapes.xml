@@ -33,6 +33,14 @@
             android:text="@string/cancel" />
 
         <Button
+            android:id="@+id/buttonCleanShapes"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/ButtonsLight"
+            android:text="@string/clean" />
+
+        <Button
             android:id="@+id/buttonApplyFindShapes"
             android:layout_height="match_parent"
             android:layout_width="0dp"

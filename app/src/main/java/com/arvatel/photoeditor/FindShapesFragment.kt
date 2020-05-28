@@ -20,6 +20,8 @@ class FindShapesFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_find_shapes, container, false)
         var tempImage = (activity as ImageFromActivityInterface).getTempImage()
+        var isFaces : Boolean = false
+        var isShapes : Boolean = false
 
         Log.e("amrr ", OpenCVLoader.initDebug().toString())
         view.showImageFindShapes.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
@@ -32,12 +34,24 @@ class FindShapesFragment : Fragment() {
         }
 
         view.buttonFindFaces.setOnClickListener {
-            tempImage = OpenCvUtil.searchForFaces((activity as ImageFromActivityInterface).getTempImage(), context)
-            view.showImageFindShapes.setImageBitmap(tempImage)
+            if (!isFaces) {
+                tempImage = OpenCvUtil.searchForFaces(tempImage, context)
+                view.showImageFindShapes.setImageBitmap(tempImage)
+                isFaces = true
+            }
         }
         view.buttonFindBasicShapes.setOnClickListener {
-            tempImage = OpenCvUtil.searchForShapes((activity as ImageFromActivityInterface).getTempImage())
+            if (!isShapes) {
+                tempImage = OpenCvUtil.searchForShapes(tempImage)
+                view.showImageFindShapes.setImageBitmap(tempImage)
+                isShapes = true
+            }
+        }
+        view.buttonCleanShapes.setOnClickListener {
+            tempImage = (activity as ImageFromActivityInterface).getTempImage()
             view.showImageFindShapes.setImageBitmap(tempImage)
+            isFaces = false
+            isShapes = false
         }
 
         return view
