@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageScalingFragment">
+
+    <ImageView
+        android:id="@+id/showImageScaling"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        style="@style/ShowPhotoStyle.Scaling"
+        app:layout_constraintBottom_toTopOf="@id/seekBarHeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBarWidth"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:progress="600"
+        android:max="1200"
+        style="@style/SeekBarStyle"
+        app:layout_constraintBottom_toTopOf="@id/toolBarScaling"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBarHeight"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:progress="800"
+        android:max="1600"
+        style="@style/SeekBarStyle"
+        app:layout_constraintBottom_toTopOf="@id/seekBarWidth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/toolBarScaling"
+        style="@style/ToolBarStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonCancelScaling"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            style="@style/ButtonsDark"/>
+
+        <Button
+            android:id="@+id/buttonApplyScaling"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/apply"
+            style="@style/ButtonsDark"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

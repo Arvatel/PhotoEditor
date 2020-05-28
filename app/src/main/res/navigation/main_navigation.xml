@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainNavigation"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/imageRotationFragment"
+        android:name="com.arvatel.photoeditor.ImageRotationFragment"
+        android:label="fragment_image_rotation"
+        tools:layout="@layout/fragment_image_rotation" >
+        <action
+            android:id="@+id/action_imageRotationFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photoEditorFragment"
+        android:name="com.arvatel.photoeditor.PhotoEditorFragment"
+        android:label="fragment_photo_editor"
+        tools:layout="@layout/fragment_photo_editor" >
+
+        <action
+            android:id="@+id/action_photoEditorFragment_to_retouchImageFragment"
+            app:destination="@id/retouchImageFragment" />
+        <action
+            android:id="@+id/action_photoEditorFragment_to_filterFragment"
+            app:destination="@id/filterFragment" />
+        <action
+            android:id="@+id/action_photoEditorFragment_to_imageScalingFragment"
+            app:destination="@id/imageScalingFragment" />
+        <action
+            android:id="@+id/action_photoEditorFragment_to_imageRotationFragment"
+            app:destination="@id/imageRotationFragment" />
+        <action
+            android:id="@+id/action_photoEditorFragment_to_findShapesFragment"
+            app:destination="@id/findShapesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/retouchImageFragment"
+        android:name="com.arvatel.photoeditor.RetouchImageFragment"
+        android:label="fragment_retouch_image"
+        tools:layout="@layout/fragment_retouch_image" >
+        <action
+            android:id="@+id/action_retouchImageFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.arvatel.photoeditor.FilterFragment"
+        android:label="fragment_filter"
+        tools:layout="@layout/fragment_filter" >
+        <action
+            android:id="@+id/action_filterFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageScalingFragment"
+        android:name="com.arvatel.photoeditor.ImageScalingFragment"
+        android:label="fragment_image_scaling"
+        tools:layout="@layout/fragment_image_scaling" >
+        <action
+            android:id="@+id/action_imageScalingFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openPhotoFragment"
+        android:name="com.arvatel.photoeditor.OpenPhotoFragment"
+        android:label="fragment_open_photo"
+        tools:layout="@layout/fragment_open_photo" >
+        <action
+            android:id="@+id/action_openPhotoFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.arvatel.photoeditor.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_openPhotoFragment"
+            app:destination="@id/openPhotoFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_splineFragment"
+            app:destination="@id/splineFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splineFragment"
+        android:name="com.arvatel.photoeditor.SplineFragment"
+        android:label="fragment_spline"
+        tools:layout="@layout/fragment_spline" >
+        <action
+            android:id="@+id/action_splineFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/findShapesFragment"
+        android:name="com.arvatel.photoeditor.FindShapesFragment"
+        android:label="fragment_find_shapes"
+        tools:layout="@layout/fragment_find_shapes" >
+        <action
+            android:id="@+id/action_findShapesFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
+    </fragment>
+</navigation>
