@@ -20,6 +20,7 @@ class FilterFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_filter, container, false)
         var tempImage : Bitmap = (activity as ImageFromActivityInterface).getTempImage()
         var filter : Int = 0
+        var contrastLevel : Float = view.seekBarContrast.progress.toFloat() - 500f
 
         view.showImageFilter.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
 
@@ -32,13 +33,13 @@ class FilterFragment : Fragment() {
                     applyGreyFilter((activity as ImageFromActivityInterface).getMainImage()))
                 3 -> (activity as ImageFromActivityInterface).setMainImage(
                     applySketchFilter((activity as ImageFromActivityInterface).getMainImage()))
-//                4 -> (activity as ImageFromActivityInterface).setMainImage(
-//                    applyCircularFilter((activity as ImageFromActivityInterface).getMainImage()))
+                4 -> (activity as ImageFromActivityInterface).setMainImage(
+                    applyCircularFilter((activity as ImageFromActivityInterface).getMainImage()))
+                5 -> (activity as ImageFromActivityInterface).setMainImage(
+                    applySharpining((activity as ImageFromActivityInterface).getMainImage()))
+                6 -> (activity as ImageFromActivityInterface).setMainImage(
+                    increaseContrast((activity as ImageFromActivityInterface).getMainImage(), contrastLevel))
             }
-            Navigation.findNavController(view).navigate(R.id.action_filterFragment_to_photoEditorFragment)
-        }
-
-        view.buttonCancelFilter.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_filterFragment_to_photoEditorFragment)
         }
 
@@ -60,11 +61,33 @@ class FilterFragment : Fragment() {
             view.showImageFilter.setImageBitmap(tempImage)
         }
 
-//        view.buttonBonus.setOnClickListener {
-//            tempImage = applyCircularFilter((activity as ImageFromActivityInterface).getTempImage())
-//            filter = 4
-//            view.showImageFilter.setImageBitmap(tempImage)
-//        }
+        view.buttonBonus.setOnClickListener {
+            tempImage = applyCircularFilter((activity as ImageFromActivityInterface).getTempImage())
+            filter = 4
+            view.showImageFilter.setImageBitmap(tempImage)
+        }
+
+        view.buttonUnsharp.setOnClickListener {
+            tempImage = applySharpining((activity as ImageFromActivityInterface).getTempImage())
+            filter = 5
+            view.showImageFilter.setImageBitmap(tempImage)
+        }
+
+        view.buttonContrast.setOnClickListener {
+            contrastLevel = view.seekBarContrast.progress.toFloat() - 500f
+            tempImage = increaseContrast((activity as ImageFromActivityInterface).getTempImage(), contrastLevel)
+            filter = 6
+            view.showImageFilter.setImageBitmap(tempImage)
+        }
+
+        view.buttonCancelFilter.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_filterFragment_to_photoEditorFragment)
+        }
+
+        view.buttonClearFilter.setOnClickListener {
+            tempImage = (activity as ImageFromActivityInterface).getTempImage()
+            view.showImageFilter.setImageBitmap(tempImage)
+        }
 
         return view
     }
