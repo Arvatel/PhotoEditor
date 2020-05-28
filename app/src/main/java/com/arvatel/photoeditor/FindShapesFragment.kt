@@ -23,6 +23,7 @@ class FindShapesFragment : Fragment() {
 
         Log.e("amrr ", OpenCVLoader.initDebug().toString())
         view.showImageFindShapes.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
+
         view.buttonApplyFindShapes.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_findShapesFragment_to_photoEditorFragment)
         }

@@ -18,7 +18,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_tool.view.*
+import kotlinx.android.synthetic.main.fragment_photo_editor.*
 import kotlinx.android.synthetic.main.fragment_photo_editor.view.*
+import kotlinx.android.synthetic.main.fragment_photo_editor.view.showImage
 import java.io.FileNotFoundException
 
 
@@ -102,8 +104,7 @@ class PhotoEditorFragment : Fragment() {
                     (activity as ImageFromActivityInterface).setBothImages(
                         MediaStore.Images.Media.getBitmap((activity as Context).contentResolver, imageUri))
 
-                    Navigation.findNavController(view as View)
-                        .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
+                    showImage.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
                 }
                 catch (e : FileNotFoundException){
                     e.printStackTrace()
@@ -111,8 +112,8 @@ class PhotoEditorFragment : Fragment() {
             }
             REQUEST_IMAGE_CAPTURE -> if (resultCode == Activity.RESULT_OK) {
                 (activity as ImageFromActivityInterface).setBothImages(data?.extras?.get("data") as Bitmap)
-                Navigation.findNavController(view as View)
-                    .navigate(R.id.action_openPhotoFragment_to_photoEditorFragment)
+
+                showImage.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
             }
         }
     }
