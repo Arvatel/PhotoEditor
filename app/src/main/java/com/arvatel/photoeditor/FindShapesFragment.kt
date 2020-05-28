@@ -1,5 +1,6 @@
 package com.arvatel.photoeditor
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,7 +20,7 @@ class FindShapesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_find_shapes, container, false)
-        var tempImage = (activity as ImageFromActivityInterface).getTempImage()
+        var tempImage : Bitmap = (activity as ImageFromActivityInterface).getTempImage().copy(Bitmap.Config.ARGB_8888, false)
         var isFaces : Boolean = false
         var isShapes : Boolean = false
 
@@ -35,21 +36,19 @@ class FindShapesFragment : Fragment() {
 
         view.buttonFindFaces.setOnClickListener {
             if (!isFaces) {
-                tempImage = OpenCvUtil.searchForFaces(tempImage, context)
-                view.showImageFindShapes.setImageBitmap(tempImage)
+                view.showImageFindShapes.setImageBitmap(OpenCvUtil.searchForFaces(tempImage, context))
                 isFaces = true
             }
         }
         view.buttonFindBasicShapes.setOnClickListener {
             if (!isShapes) {
-                tempImage = OpenCvUtil.searchForShapes(tempImage)
-                view.showImageFindShapes.setImageBitmap(tempImage)
+                view.showImageFindShapes.setImageBitmap(OpenCvUtil.searchForShapes(tempImage))
                 isShapes = true
             }
         }
         view.buttonCleanShapes.setOnClickListener {
-            tempImage = (activity as ImageFromActivityInterface).getTempImage()
-            view.showImageFindShapes.setImageBitmap(tempImage)
+            tempImage = (activity as ImageFromActivityInterface).getTempImage().copy(Bitmap.Config.ARGB_8888, false)
+            view.showImageFindShapes.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
             isFaces = false
             isShapes = false
         }
