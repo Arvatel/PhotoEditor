@@ -43,5 +43,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    implementation project(path: ':openCVLibrary430')
+    implementation project(path: ':opencv')
 }
