@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml:2:1-4:12
+INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml:2:1-4:12
+INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml:2:1-4:12
+	package
+		ADDED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml:3:7-27
+		INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+		INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml:2:11-69
+uses-sdk
+INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+		ADDED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+		INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+		ADDED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
+		INJECTED from /media/nastya/ef36ec52-8b82-45dd-be27-3739013e6282/Projects/Android/PhotoEditor/openCVLibrary430/src/main/AndroidManifest.xml
