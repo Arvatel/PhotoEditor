@@ -26,5 +26,7 @@
     <string name="clear">Clear</string>
     <string name="unsharp_masking">Unsharp masking</string>
     <string name="contrast">Contrast:</string>
+    <string name="scaling">Scaling</string>
+    <string name="filters">Filters</string>
 
 </resources>

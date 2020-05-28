@@ -21,35 +21,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonPhotoEditor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/photo_editor"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textChoose"
-        android:layout_marginTop="70dp"/>
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/buttonSplineLines"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/spline_lines"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonPhotoEditor"
-        android:layout_marginTop="70dp"/>
+        <Button
+            android:id="@+id/buttonPhotoEditor"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/photo_editor"
+            style="@style/ButtonsLight"
+            android:textSize="35sp"/>
 
-    <Button
-        android:id="@+id/buttonCube"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cube"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonSplineLines"
-        android:layout_marginTop="70dp" />
+        <Button
+            android:id="@+id/buttonSplineLines"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/spline_lines"
+            style="@style/ButtonsLight"
+            android:textSize="35sp"/>
+
+        <Button
+            android:id="@+id/buttonCube"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/cube"
+            style="@style/ButtonsLight"
+            android:textSize="35sp"/>
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

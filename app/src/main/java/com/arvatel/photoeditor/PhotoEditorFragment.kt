@@ -44,6 +44,10 @@ class PhotoEditorFragment : Fragment() {
         view.buttonFilterBS.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_filterFragment)
         }
+        view.buttonFindShapesBS.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_findShapesFragment)
+        }
+
         view.buttonExport.setOnClickListener {
             val w = (activity as ImageFromActivityInterface).getMainImage().width
             val h = (activity as ImageFromActivityInterface).getMainImage().height

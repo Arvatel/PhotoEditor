@@ -24,14 +24,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Rotate" />
+                android:text="@string/rotate" />
 
             <Button
-                android:id="@+id/buttonResizeBS"
+                android:id="@+id/buttonScalingBS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Resize"
+                android:text="@string/scaling"
                 android:drawableTop="@drawable/ic_photo_size_select_large_black_24dp"
                 style="@style/ButtonsLight"/>
 
@@ -50,31 +50,31 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <Button
-                android:id="@+id/buttonScalingBS"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Scaling"
-                android:drawableTop="@drawable/ic_compare_black_24dp"
-                style="@style/ButtonsLight"/>
-
-            <Button
                 android:id="@+id/buttonFilterBS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Filters"
-                android:drawableTop="@drawable/ic_photo_filter_black_24dp"
+                android:text="@string/filters"
+                android:drawableTop="@drawable/ic_compare_black_24dp"
                 style="@style/ButtonsLight"/>
 
+<!--            <Button-->
+<!--                android:id="@+id/buttonFilterBS"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Filters"-->
+<!--                android:drawableTop="@drawable/ic_photo_filter_black_24dp"-->
+<!--                style="@style/ButtonsLight"/>-->
+
             <Button
-                android:id="@+id/buttonSegmentationBS"
+                android:id="@+id/buttonFindShapesBS"
                 style="@style/ButtonsLight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_bubble_chart_black_24dp"
-                android:text="Segmentation" />
+                android:text="Find shapes" />
         </TableRow>
     </TableLayout>
 

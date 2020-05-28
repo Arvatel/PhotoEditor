@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_photoEditorFragment_to_imageRotationFragment"
             app:destination="@id/imageRotationFragment" />
+        <action
+            android:id="@+id/action_photoEditorFragment_to_findShapesFragment"
+            app:destination="@id/findShapesFragment" />
     </fragment>
     <fragment
         android:id="@+id/retouchImageFragment"
@@ -90,5 +93,14 @@
         <action
             android:id="@+id/action_splineFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/findShapesFragment"
+        android:name="com.arvatel.photoeditor.FindShapesFragment"
+        android:label="fragment_find_shapes"
+        tools:layout="@layout/fragment_find_shapes" >
+        <action
+            android:id="@+id/action_findShapesFragment_to_photoEditorFragment"
+            app:destination="@id/photoEditorFragment" />
     </fragment>
 </navigation>
