@@ -7,7 +7,7 @@
     tools:context=".FindShapesFragment">
 
     <ImageView
-        android:id="@+id/shoeImageFindShapes"
+        android:id="@+id/showImageFindShapes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         style="@style/ShowPhotoStyle"

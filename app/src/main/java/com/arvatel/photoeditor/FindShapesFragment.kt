@@ -21,7 +21,7 @@ class FindShapesFragment : Fragment() {
         var tempImage = (activity as ImageFromActivityInterface).getTempImage()
 
         OpenCVLoader.initDebug()
-        view.shoeImageFindShapes.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
+        view.showImageFindShapes.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
         view.buttonApplyFindShapes.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_findShapesFragment_to_photoEditorFragment)
         }
@@ -30,14 +30,13 @@ class FindShapesFragment : Fragment() {
         }
 
         view.buttonFindFaces.setOnClickListener {
-            tempImage = OpenCvUtil.searchForFaces((activity as ImageFromActivityInterface).getTempImage(), (activity as MainActivity))
-            view.shoeImageFindShapes.setImageBitmap(tempImage)
+            tempImage = OpenCvUtil.searchForFaces((activity as ImageFromActivityInterface).getTempImage(), context)
+            view.showImageFindShapes.setImageBitmap(tempImage)
         }
-        view.buttonFindFaces.setOnClickListener {
+        view.buttonFindBasicShapes.setOnClickListener {
             tempImage = OpenCvUtil.searchForShapes((activity as ImageFromActivityInterface).getTempImage())
-            view.shoeImageFindShapes.setImageBitmap(tempImage)
+            view.showImageFindShapes.setImageBitmap(tempImage)
         }
-
 
         return view
     }
