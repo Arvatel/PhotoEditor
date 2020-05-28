@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.arvatel.photoeditor.algorithms.OpenCvUtil
 import kotlinx.android.synthetic.main.fragment_find_shapes.view.*
+import org.opencv.android.OpenCVLoader
 
 
 class FindShapesFragment : Fragment() {
@@ -16,13 +18,24 @@ class FindShapesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_find_shapes, container, false)
+        var tempImage = (activity as ImageFromActivityInterface).getTempImage()
 
+        OpenCVLoader.initDebug()
         view.shoeImageFindShapes.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
         view.buttonApplyFindShapes.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_findShapesFragment_to_photoEditorFragment)
         }
         view.buttonCancelFindShapes.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_findShapesFragment_to_photoEditorFragment)
+        }
+
+        view.buttonFindFaces.setOnClickListener {
+            tempImage = OpenCvUtil.searchForFaces((activity as ImageFromActivityInterface).getTempImage(), (activity as MainActivity))
+            view.shoeImageFindShapes.setImageBitmap(tempImage)
+        }
+        view.buttonFindFaces.setOnClickListener {
+            tempImage = OpenCvUtil.searchForShapes((activity as ImageFromActivityInterface).getTempImage())
+            view.shoeImageFindShapes.setImageBitmap(tempImage)
         }
 
 

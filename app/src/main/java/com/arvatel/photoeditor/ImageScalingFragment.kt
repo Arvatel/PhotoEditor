@@ -1,7 +1,6 @@
 package com.arvatel.photoeditor
 
 import android.graphics.Bitmap
-import android.opengl.ETC1.getWidth
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
