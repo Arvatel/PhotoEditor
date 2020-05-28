@@ -9,6 +9,7 @@
 
     <style name="OpenFileTheme">
         <item name="android:textColor">@color/colorTextOF</item>
+        <item name="android:fontFamily">@font/sanchez_regular</item>
     </style>
 
     <style name="ToolBarStyle">
@@ -41,11 +42,13 @@
         <item name="android:textColor">@color/colorOrange</item>
         <item name="android:background">@color/colorWhite</item>
         <item name="android:drawablePadding">-20dp</item>
+        <item name="android:fontFamily">@font/sanchez_regular</item>
     </style>
 
     <style name="ButtonsDark" parent="ButtonsStyle">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:background">@color/colorOrange</item>
+        <item name="android:fontFamily">@font/sanchez_regular</item>
     </style>
 
 </resources>

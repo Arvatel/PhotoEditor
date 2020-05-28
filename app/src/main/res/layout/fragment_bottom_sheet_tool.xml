@@ -20,7 +20,6 @@
                 android:id="@+id/buttonRotateBS"
                 style="@style/ButtonsLight"
                 android:drawableTop="@drawable/ic_autorenew_black_24dp"
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
