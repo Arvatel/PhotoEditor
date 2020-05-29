@@ -4,6 +4,9 @@ import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.Bitmap.createScaledBitmap
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 
@@ -13,13 +16,17 @@ interface ImageFromActivityInterface {
     fun getTempImage() : Bitmap
     fun setTempImage(image : Bitmap)
     fun setBothImages(image : Bitmap)
-    fun resizeImage(image: Bitmap) : Bitmap
+    fun resizeImage(image: Bitmap, size: Int = MainActivity.MAX_SIZE): Bitmap
+    fun beforeLaoding(view: View)
+    fun afterLaoding(view: View)
+    fun getThumbnail(): Bitmap
 }
 
 class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
 
     private lateinit var currentImage : Bitmap
     private lateinit var tempImage : Bitmap
+    private lateinit var thumbnail: Bitmap
 
     override fun getMainImage() : Bitmap {
         return currentImage
@@ -38,15 +45,32 @@ class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
         currentImage = image
         tempImage = image
         tempImage = resizeImage(tempImage)
+        thumbnail = resizeImage(tempImage, THUMPNAIL_SIZE)
     }
 
-    override fun resizeImage(image: Bitmap) : Bitmap {
-        if (image.width < MAX_SIZE && image.height < MAX_SIZE) return image
+    override fun resizeImage(image: Bitmap, size: Int): Bitmap {
+        if (image.width < size && image.height < size) return image
 
         val max = if (image.width > image.height) image.width else image.height
-        val cof : Double = MAX_SIZE.toDouble() / max
+        val cof: Double = size.toDouble() / max
         return createScaledBitmap(image, (image.width * cof).toInt(), (image.height * cof).toInt(), false)
     }
+
+    override fun beforeLaoding(view: View) {
+        view.visibility = ProgressBar.VISIBLE
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
+    }
+
+    override fun afterLaoding(view: View) {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        view.visibility = ProgressBar.GONE
+    }
+
+    override fun getThumbnail() = thumbnail
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -59,13 +83,15 @@ class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
         ActivityCompat.requestPermissions(this, permissionList, MY_PERMISSION_REQUEST_CODE)
     }
 
+
     companion object{
         private val permissionList = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
         )
-        private const val MAX_SIZE : Int = 1080
+        public const val MAX_SIZE: Int = 1080
+        private const val THUMPNAIL_SIZE: Int = 380
         private const val MY_PERMISSION_REQUEST_CODE = 1001
     }
 }
