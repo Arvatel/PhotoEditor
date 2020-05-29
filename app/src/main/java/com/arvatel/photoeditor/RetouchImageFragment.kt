@@ -25,11 +25,11 @@ class RetouchImageFragment : Fragment() {
 
         view.buttonApplyRetouch.setOnClickListener {
 //            (activity as ImageFromActivityInterface).setImage(tempImage)
-            Navigation.findNavController(view).navigate(R.id.action_retouchImageFragment_to_photoEditorFragment)
+           // Navigation.findNavController(view).navigate(R.id.action_retouchImageFragment_to_photoEditorFragment)
         }
 
         view.buttonCancelRetouch.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_retouchImageFragment_to_photoEditorFragment)
+          //  Navigation.findNavController(view).navigate(R.id.action_retouchImageFragment_to_photoEditorFragment)
         }
 
         return view

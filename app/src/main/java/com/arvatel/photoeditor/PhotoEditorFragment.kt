@@ -46,7 +46,10 @@ class PhotoEditorFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_imageRotationFragment)
         }
         view.buttonRetouchBS.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_retouchImageFragment)
+            //Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_retouchImageFragment)
+            val text = "Retouch could be here! Call: 8-800-555-3535 :D"
+            val duration = Toast.LENGTH_LONG
+            Toast.makeText(context, text, duration).show()
         }
         view.buttonScalingBS.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_imageScalingFragment)
