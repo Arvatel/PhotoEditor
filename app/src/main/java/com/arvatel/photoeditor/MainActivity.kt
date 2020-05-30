@@ -14,8 +14,6 @@ import org.opencv.android.OpenCVLoader
 interface ImageFromActivityInterface {
     fun getMainImage() : Bitmap
     fun setMainImage(image : Bitmap)
-    fun getTempImage() : Bitmap
-    fun setTempImage(image : Bitmap)
     fun setBothImages(image : Bitmap)
     fun resizeImage(image: Bitmap, size: Int = MainActivity.MAX_SIZE): Bitmap
     fun beforeLaoding(view: View)
@@ -27,7 +25,6 @@ interface ImageFromActivityInterface {
 class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
 
     private lateinit var currentImage : Bitmap
-    private lateinit var tempImage : Bitmap
     private lateinit var thumbnail: Bitmap
 
     override fun getMainImage() : Bitmap {
@@ -36,18 +33,10 @@ class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
     override fun setMainImage(image: Bitmap) {
         currentImage = image
     }
-    override fun getTempImage() : Bitmap {
-        return tempImage
-    }
-    override fun setTempImage(image: Bitmap) {
-        tempImage = image
-    }
 
     override fun setBothImages(image : Bitmap){
-        currentImage = image
-        tempImage = image
-        tempImage = resizeImage(tempImage)
-        thumbnail = resizeImage(tempImage, THUMPNAIL_SIZE)
+        currentImage = resizeImage(image, MAX_SIZE)
+        thumbnail = resizeImage(image, THUMPNAIL_SIZE)
     }
 
     override fun resizeImage(image: Bitmap, size: Int): Bitmap {
@@ -73,7 +62,7 @@ class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
 
     }
 
-    override fun getThumbnail() = thumbnail
+    override fun getThumbnail() = resizeImage(currentImage, THUMPNAIL_SIZE)
     override fun setThumbnail(thumbnail: Bitmap) {
         this.thumbnail = thumbnail
     }

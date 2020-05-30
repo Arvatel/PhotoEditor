@@ -33,7 +33,7 @@ class PhotoEditorFragment : Fragment() {
 
         savePhoto= SavePhoto()
 
-        view.showImage.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
+        view.showImage.setImageBitmap((activity as ImageFromActivityInterface).getMainImage())
 
         view.buttonRotateBS.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_photoEditorFragment_to_imageRotationFragment)
@@ -56,7 +56,7 @@ class PhotoEditorFragment : Fragment() {
 
         view.buttonExport.setOnClickListener {
             val str =savePhoto.saveImage(
-                (activity as ImageFromActivityInterface).getTempImage(),
+                (activity as ImageFromActivityInterface).getMainImage(),
                 context,
                 "ourGreatApp"
             )
@@ -112,7 +112,7 @@ class PhotoEditorFragment : Fragment() {
                     (activity as ImageFromActivityInterface).setBothImages(
                         MediaStore.Images.Media.getBitmap((activity as Context).contentResolver, imageUri))
 
-                    showImage.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
+                    showImage.setImageBitmap((activity as ImageFromActivityInterface).getMainImage())
                 }
                 catch (e : FileNotFoundException){
                     e.printStackTrace()
@@ -121,7 +121,7 @@ class PhotoEditorFragment : Fragment() {
             REQUEST_IMAGE_CAPTURE -> if (resultCode == Activity.RESULT_OK) {
                 (activity as ImageFromActivityInterface).setBothImages(data?.extras?.get("data") as Bitmap)
 
-                showImage.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
+                showImage.setImageBitmap((activity as ImageFromActivityInterface).getMainImage())
             }
         }
     }

@@ -29,7 +29,7 @@ class ImageScalingFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_image_scaling, container, false)
 
-        tempImage = (activity as ImageFromActivityInterface).getTempImage()
+        tempImage = (activity as ImageFromActivityInterface).getMainImage()
 
         view.showImageScaling.setImageBitmap(tempImage)
         progressObject = Progress(view.progressBarScalling)
@@ -68,7 +68,7 @@ class ImageScalingFragment : Fragment() {
             }
         })
         view.buttonApplyScaling.setOnClickListener {
-            (activity as ImageFromActivityInterface).setTempImage(showImageScaling.drawable.toBitmap())
+            (activity as ImageFromActivityInterface).setMainImage(showImageScaling.drawable.toBitmap())
 
             Navigation.findNavController(view).navigate(R.id.action_imageScalingFragment_to_photoEditorFragment)
         }

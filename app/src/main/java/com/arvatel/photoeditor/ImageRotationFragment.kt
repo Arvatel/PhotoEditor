@@ -19,8 +19,6 @@ import kotlinx.coroutines.withContext
 
 class ImageRotationFragment : Fragment() {
     lateinit var tempImage: Bitmap
-
-    //    lateinit var mainImage: Bitmap
     lateinit var thumbnail: Bitmap
     lateinit var myview: View
     lateinit var progressObject: Progress
@@ -33,10 +31,9 @@ class ImageRotationFragment : Fragment() {
 
         progressObject = Progress(myview.progressBarRotation)
 
-        myview.showImageRotate.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
+        myview.showImageRotate.setImageBitmap((activity as ImageFromActivityInterface).getMainImage())
 
-        tempImage = (activity as ImageFromActivityInterface).getTempImage()
-//        mainImage = (activity as ImageFromActivityInterface).getMainImage()
+        tempImage = (activity as ImageFromActivityInterface).getMainImage()
         thumbnail = (activity as ImageFromActivityInterface).getThumbnail()
 
 
@@ -53,7 +50,7 @@ class ImageRotationFragment : Fragment() {
                     false
                 )
             )
-            (activity as ImageFromActivityInterface).setTempImage(myview.showImageRotate.drawable.toBitmap())
+            (activity as ImageFromActivityInterface).setMainImage(myview.showImageRotate.drawable.toBitmap())
 
             Navigation.findNavController(myview)
                 .navigate(R.id.action_imageRotationFragment_to_photoEditorFragment)

@@ -27,14 +27,14 @@ class FilterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_filter, container, false)
-        tempImage = (activity as ImageFromActivityInterface).getTempImage()
+        tempImage = (activity as ImageFromActivityInterface).getMainImage()
         contrastLevel = view.seekBarContrast.progress.toFloat() - 500f
         progressObject = Progress(view.progressBarContrast)
 
         view.showImageFilter.setImageBitmap(tempImage)
 
         view.buttonApplyFilter.setOnClickListener {
-            (activity as ImageFromActivityInterface).setTempImage(view.showImageFilter.drawable.toBitmap())
+            (activity as ImageFromActivityInterface).setMainImage(view.showImageFilter.drawable.toBitmap())
             Navigation.findNavController(view).navigate(R.id.action_filterFragment_to_photoEditorFragment)
         }
 

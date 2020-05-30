@@ -23,7 +23,7 @@ class FindShapesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_find_shapes, container, false)
-        tempImage = (activity as ImageFromActivityInterface).getTempImage()
+        tempImage = (activity as ImageFromActivityInterface).getMainImage()
         var foundFaces = false
         var foundShapes = false
 
