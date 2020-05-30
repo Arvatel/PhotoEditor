@@ -24,14 +24,6 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/buttonCleanSpline"
-            style="@style/ButtonsLight"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/clean" />
-
-        <Button
             android:id="@+id/buttonLineSpline"
             style="@style/ButtonsLight"
             android:layout_width="0dp"
@@ -63,6 +55,14 @@
             android:layout_weight="1"
             android:text="@string/cancel"
             style="@style/ButtonsDark"/>
+
+        <Button
+            android:id="@+id/buttonCleanSpline"
+            style="@style/ButtonsLight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/clean" />
 
         <Button
             android:id="@+id/buttonApplySpline"

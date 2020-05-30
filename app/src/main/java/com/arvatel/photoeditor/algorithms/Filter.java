@@ -3,11 +3,13 @@ package com.arvatel.photoeditor.algorithms;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 
+import com.arvatel.photoeditor.Progress;
+
 public class Filter {
     private static final int HIGHEST_COLOR_VALUE = 255;
     private static final int LOWEST_COLOR_VALUE = 0;
 
-    public static Bitmap applySketchFilter(Bitmap oldBitmap) {
+    public static Bitmap applySketchFilter(Bitmap oldBitmap, Progress progress) {
         // copying to newBitmap for manipulation
         Bitmap newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
@@ -27,6 +29,8 @@ public class Filter {
 
                 newBitmap.setPixel(i, j, newPixel);
             }
+            if (i % 100 == 0)
+                progress.report((double) i / imageWidth);
         }
         return newBitmap;
 
@@ -63,7 +67,7 @@ public class Filter {
         return newPixel;
     }
 
-    public  static Bitmap applyGreyFilter(Bitmap oldBitmap) {
+    public static Bitmap applyGreyFilter(Bitmap oldBitmap, Progress progress) {
         // copying to newBitmap for manipulation
         Bitmap newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
@@ -81,6 +85,8 @@ public class Filter {
                 int newPixel = getGreyPixel(oldPixel);
                 newBitmap.setPixel(i, j, newPixel);
             }
+            if (i % 100 == 0)
+                progress.report((double) i / imageWidth);
         }
         return newBitmap;
     }
@@ -96,10 +102,10 @@ public class Filter {
         int intensity = (oldRed + oldBlue + oldGreen) / 3;
 
         // applying new pixel values from above to newBitmap
-        return Color.argb(oldAlpha, intensity, intensity, intensity);
+        return Color.argb(oldAlpha, truncate(intensity), truncate(intensity), truncate(intensity));
     }
 
-    public  static Bitmap applySepiaFilter(Bitmap oldBitmap) {
+    public static Bitmap applySepiaFilter(Bitmap oldBitmap, Progress progress) {
         // copying to newBitmap for manipulation
         Bitmap newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
@@ -117,6 +123,8 @@ public class Filter {
                 int newPixel = getSepiaPixel(oldPixel);
                 newBitmap.setPixel(i, j, newPixel);
             }
+            if (i % 100 == 0)
+                progress.report((double) i / imageWidth);
         }
         return newBitmap;
     }
@@ -140,7 +148,7 @@ public class Filter {
         return Color.argb(oldAlpha, newRed, newGreen, newBlue);
     }
 
-    public static Bitmap applyCircularFilter(Bitmap oldBitmap) {
+    public static Bitmap applyCircularFilter(Bitmap oldBitmap, Progress progress) {
         Bitmap newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true);
         int imageWidth = oldBitmap.getWidth();
         int imageHeight = oldBitmap.getHeight();
@@ -195,9 +203,12 @@ public class Filter {
                 }
                 l++;
             }
+
+            if (k % 100 == 0)
+                progress.report((double) i / imageWidth);
         }
 
-
+        progress.report(.7);
         //make circle in the center
         //https://stackoverflow.com/questions/481144/equation-for-testing-if-a-point-is-inside-a-circle?rq=1
         int center_x = imageWidth / 2;
@@ -213,13 +224,17 @@ public class Filter {
                     newBitmap.setPixel(i, j, newPixel);
                 }
             }
+            if (i % 100 == 0)
+                progress.report((double) i / imageWidth);
         }
         return newBitmap;
     }
 
-    public static Bitmap applySharpining(Bitmap oldBitmap) {//https://stackoverflow.com/questions/2938162/how-does-an-unsharp-mask-work
-        Bitmap blaredImage = getBluredImage(oldBitmap);
-        Bitmap unsharpMask = subBluredImage(blaredImage, oldBitmap);
+    public static Bitmap applySharpining(Bitmap oldBitmap, Progress progress) {//https://stackoverflow.com/questions/2938162/how-does-an-unsharp-mask-work
+        Bitmap blaredImage = getBluredImage(oldBitmap, progress);
+        progress.report(.3);
+        Bitmap unsharpMask = subBluredImage(blaredImage, oldBitmap, progress);
+        progress.report(.6);
 
         Bitmap newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true);
 
@@ -231,6 +246,8 @@ public class Filter {
                 int newPixel = getUnsharpMaskPixel(ogriginalPixel, unsharpMaskPixel);
                 newBitmap.setPixel(i, j, newPixel);
             }
+            if (i % 100 == 0)
+                progress.report((double) i / oldBitmap.getWidth());
         }
         return newBitmap;
     }
@@ -263,7 +280,7 @@ public class Filter {
         return Color.argb(oldAlpha, truncate(oldRed), truncate(oldGreen), truncate(oldBlue));
     }
 
-    public static Bitmap increaseContrast(Bitmap original,float contrastLevel) {
+    public static Bitmap increaseContrast(Bitmap original, float contrastLevel, Progress progress) {
 
         Bitmap newBitmap = original.copy(Bitmap.Config.ARGB_8888, true);
 
@@ -280,6 +297,8 @@ public class Filter {
                 int newPixel = Color.argb(Color.alpha(originalPixel), pixelValueR, pixelValueG, pixelValueB);
                 newBitmap.setPixel(i, j, newPixel);
             }
+            if (i % 100 == 0)
+                progress.report((double) i / original.getWidth());
         }
         return newBitmap;
     }
@@ -288,7 +307,7 @@ public class Filter {
         return f * (color - 128f) + 128f;
     }
 
-    private static Bitmap subBluredImage(Bitmap bluredImage, Bitmap originalImage) {
+    private static Bitmap subBluredImage(Bitmap bluredImage, Bitmap originalImage, Progress progress) {
         Bitmap newBitmap = originalImage.copy(Bitmap.Config.ARGB_8888, true);
 
         for (int i = 0; i < originalImage.getWidth(); i++) {
@@ -313,6 +332,8 @@ public class Filter {
                 int newPixel = Color.argb(Color.alpha(originalPixel), newPixelValueR, newPixelValueG, newPixelValueB);
                 newBitmap.setPixel(i, j, newPixel);
             }
+            if (i % 100 == 0)
+                progress.report((double) i / originalImage.getWidth());
         }
         return newBitmap;
     }
@@ -324,7 +345,7 @@ public class Filter {
             {1 / 16f, 1 / 8f, 1 / 16f}
     };
 
-    private static Bitmap getBluredImage(Bitmap oldBitmap) {
+    private static Bitmap getBluredImage(Bitmap oldBitmap, Progress progress) {
         Bitmap newBitmap = oldBitmap.copy(Bitmap.Config.ARGB_8888, true);
         //a nice pseudo code
         //https://stackoverflow.com/questions/1696113/how-do-i-gaussian-blur-an-image-without-using-any-in-built-gaussian-functions
@@ -350,6 +371,8 @@ public class Filter {
                 int newPixel = Color.argb(alpha, truncate(newPixelValueR), truncate(newPixelValueG), truncate(newPixelValueB));
                 newBitmap.setPixel(i, j, newPixel);
             }
+            if (i % 100 == 0)
+                progress.report((double) i / oldBitmap.getWidth());
         }
         return newBitmap;
     }

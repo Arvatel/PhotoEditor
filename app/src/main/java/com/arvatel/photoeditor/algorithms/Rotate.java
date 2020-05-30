@@ -2,10 +2,12 @@ package com.arvatel.photoeditor.algorithms;
 
 import android.graphics.Bitmap;
 
+import com.arvatel.photoeditor.Progress;
+
 
 public class Rotate {
 
-    public static Bitmap rotate(Bitmap img) {
+    public static Bitmap rotate(Bitmap img, Progress progress, boolean reportProgress) {
         int width = img.getWidth();
         int height = img.getHeight();
         Bitmap newImage = Bitmap.createBitmap(height, width, img.getConfig());
@@ -13,11 +15,13 @@ public class Rotate {
             for (int j = 0; j < height; j++) {
                 newImage.setPixel(height - 1 - j, i, img.getPixel(i, j));
             }
+            if (reportProgress && i % 100 == 0)
+                progress.report((double) i / width);
         }
         return newImage;
     }
 
-    public static Bitmap rotate(Bitmap img, double angle) {
+    public static Bitmap rotate(Bitmap img, double angle, Progress progress, boolean reportProgress) {
         int width = img.getWidth();
         int height = img.getHeight();
         Bitmap newImage = Bitmap.createBitmap(width, height, img.getConfig());
@@ -39,6 +43,8 @@ public class Rotate {
                     newImage.setPixel(x, y, img.getPixel(xx, yy));
                 }
             }
+            if (reportProgress && x % 100 == 0)
+                progress.report((double) x / width);
         }
 
         return newImage;
