@@ -2,43 +2,36 @@ package com.arvatel.photoeditor
 
 import android.Manifest
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.core.content.PermissionChecker
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_tool.view.*
 import kotlinx.android.synthetic.main.fragment_photo_editor.*
 import kotlinx.android.synthetic.main.fragment_photo_editor.view.*
-import kotlinx.android.synthetic.main.fragment_photo_editor.view.showImage
-import java.io.*
-import java.util.*
+import java.io.FileNotFoundException
 
 
 class PhotoEditorFragment : Fragment() {
-
+    lateinit var savePhoto: SavePhoto
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_photo_editor, container, false)
+
+        savePhoto= SavePhoto()
 
         view.showImage.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
 
@@ -62,9 +55,12 @@ class PhotoEditorFragment : Fragment() {
         }
 
         view.buttonExport.setOnClickListener {
-            val uri : Uri = saveImageToInternalStorage()
-
-            Toast.makeText(activity, "uri:$uri", Toast.LENGTH_LONG).show()
+            val str =savePhoto.saveImage(
+                (activity as ImageFromActivityInterface).getTempImage(),
+                context,
+                "ourGreatApp"
+            )
+            Toast.makeText(context,"saved to: $str",Toast.LENGTH_SHORT).show()
         }
 
         view.buttonOpenPhoto.setOnClickListener {
@@ -106,24 +102,6 @@ class PhotoEditorFragment : Fragment() {
         }
     }
 
-    private fun saveImageToInternalStorage():Uri{
-
-        val bitmap = (activity as ImageFromActivityInterface).getMainImage()
-        val wrapper = ContextWrapper(context)
-
-        var file = wrapper.getDir("images", Context.MODE_APPEND)
-        file = File(file, "${UUID.randomUUID()}.jpg")
-
-        try {
-            val stream: OutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-            stream.flush()
-            stream.close()
-        } catch (e: IOException){
-            e.printStackTrace()
-        }
-        return Uri.parse(file.absolutePath)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
