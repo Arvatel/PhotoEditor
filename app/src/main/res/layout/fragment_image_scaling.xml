@@ -63,4 +63,14 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBarScalling"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/showImageScaling"
+        app:layout_constraintEnd_toEndOf="@+id/showImageScaling"
+        app:layout_constraintStart_toStartOf="@+id/showImageScaling"
+        app:layout_constraintTop_toTopOf="@+id/showImageScaling" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

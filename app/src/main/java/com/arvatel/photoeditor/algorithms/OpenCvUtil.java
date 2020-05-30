@@ -122,7 +122,7 @@ public class OpenCvUtil {
                     case 4://square
                     case 9://half-circle
                     case 15://circle
-                        Imgproc.drawContours(originalMat, contourList, i, new Scalar(0, 0, 0), 30);
+                        Imgproc.drawContours(originalMat, contourList, i, new Scalar(0, 0, 0), 10);
                 }
             }
         }

@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import org.opencv.android.OpenCVLoader
 
 interface ImageFromActivityInterface {
     fun getMainImage() : Bitmap
@@ -20,6 +21,7 @@ interface ImageFromActivityInterface {
     fun beforeLaoding(view: View)
     fun afterLaoding(view: View)
     fun getThumbnail(): Bitmap
+    fun setThumbnail(thumbnail: Bitmap)
 }
 
 class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
@@ -58,6 +60,7 @@ class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
 
     override fun beforeLaoding(view: View) {
         view.visibility = ProgressBar.VISIBLE
+        (view as ProgressBar).setProgress(0, false)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
@@ -67,9 +70,13 @@ class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
     override fun afterLaoding(view: View) {
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         view.visibility = ProgressBar.GONE
+
     }
 
     override fun getThumbnail() = thumbnail
+    override fun setThumbnail(thumbnail: Bitmap) {
+        this.thumbnail = thumbnail
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +88,7 @@ class MainActivity : AppCompatActivity(), ImageFromActivityInterface {
 
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(this, permissionList, MY_PERMISSION_REQUEST_CODE)
+        OpenCVLoader.initDebug()
     }
 
 

@@ -2,82 +2,66 @@ package com.arvatel.photoeditor
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.arvatel.photoeditor.algorithms.Filter.*
+import kotlinx.android.synthetic.main.fragment_filter.*
 import kotlinx.android.synthetic.main.fragment_filter.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class FilterFragment : Fragment() {
+    var contrastLevel: Float = 0f
+    lateinit var tempImage: Bitmap
+    lateinit var progressObject: Progress
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_filter, container, false)
-        var tempImage : Bitmap = (activity as ImageFromActivityInterface).getTempImage()
-        var filter : Int = 0
-        var contrastLevel : Float = view.seekBarContrast.progress.toFloat() - 500f
+        tempImage = (activity as ImageFromActivityInterface).getTempImage()
+        contrastLevel = view.seekBarContrast.progress.toFloat() - 500f
+        progressObject = Progress(view.progressBarContrast)
 
-        view.showImageFilter.setImageBitmap((activity as ImageFromActivityInterface).getTempImage())
+        view.showImageFilter.setImageBitmap(tempImage)
 
         view.buttonApplyFilter.setOnClickListener {
-            (activity as ImageFromActivityInterface).setTempImage(tempImage)
-            when(filter){
-                1 -> (activity as ImageFromActivityInterface).setMainImage(
-                    applySepiaFilter((activity as ImageFromActivityInterface).getMainImage()))
-                2 -> (activity as ImageFromActivityInterface).setMainImage(
-                    applyGreyFilter((activity as ImageFromActivityInterface).getMainImage()))
-                3 -> (activity as ImageFromActivityInterface).setMainImage(
-                    applySketchFilter((activity as ImageFromActivityInterface).getMainImage()))
-                4 -> (activity as ImageFromActivityInterface).setMainImage(
-                    applyCircularFilter((activity as ImageFromActivityInterface).getMainImage()))
-                5 -> (activity as ImageFromActivityInterface).setMainImage(
-                    applySharpining((activity as ImageFromActivityInterface).getMainImage()))
-                6 -> (activity as ImageFromActivityInterface).setMainImage(
-                    increaseContrast((activity as ImageFromActivityInterface).getMainImage(), contrastLevel))
-            }
+            (activity as ImageFromActivityInterface).setTempImage(view.showImageFilter.drawable.toBitmap())
             Navigation.findNavController(view).navigate(R.id.action_filterFragment_to_photoEditorFragment)
         }
 
         view.buttonSepia.setOnClickListener {
-            tempImage = applySepiaFilter((activity as ImageFromActivityInterface).getTempImage())
-            filter = 1
-            view.showImageFilter.setImageBitmap(tempImage)
+
+            startBackgroundThreadForFilter(SPEIA)
         }
 
         view.buttonGrey.setOnClickListener {
-            tempImage = applyGreyFilter((activity as ImageFromActivityInterface).getTempImage())
-            filter = 2
-            view.showImageFilter.setImageBitmap(tempImage)
+            startBackgroundThreadForFilter(GREY)
         }
 
         view.buttonSketch.setOnClickListener {
-            tempImage = applySketchFilter((activity as ImageFromActivityInterface).getTempImage())
-            filter = 3
-            view.showImageFilter.setImageBitmap(tempImage)
+            startBackgroundThreadForFilter(SKETCH)
         }
 
         view.buttonBonus.setOnClickListener {
-            tempImage = applyCircularFilter((activity as ImageFromActivityInterface).getTempImage())
-            filter = 4
-            view.showImageFilter.setImageBitmap(tempImage)
+            startBackgroundThreadForFilter(CIRCULAR)
         }
 
         view.buttonUnsharp.setOnClickListener {
-            tempImage = applySharpining((activity as ImageFromActivityInterface).getTempImage())
-            filter = 5
-            view.showImageFilter.setImageBitmap(tempImage)
+            startBackgroundThreadForFilter(SHARPING)
         }
 
         view.buttonContrast.setOnClickListener {
             contrastLevel = view.seekBarContrast.progress.toFloat() - 500f
-            tempImage = increaseContrast((activity as ImageFromActivityInterface).getTempImage(), contrastLevel)
-            filter = 6
-            view.showImageFilter.setImageBitmap(tempImage)
+            startBackgroundThreadForFilter(CONTRAST)
         }
 
         view.buttonCancelFilter.setOnClickListener {
@@ -85,11 +69,48 @@ class FilterFragment : Fragment() {
         }
 
         view.buttonClearFilter.setOnClickListener {
-            tempImage = (activity as ImageFromActivityInterface).getTempImage()
             view.showImageFilter.setImageBitmap(tempImage)
         }
 
         return view
     }
 
+    fun startBackgroundThreadForFilter(filterCode: Int) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            (activity as ImageFromActivityInterface).beforeLaoding(progressBarContrast)
+            val result = applyFilter(filterCode)
+            (activity as ImageFromActivityInterface).afterLaoding(progressBarContrast)
+            showImageFilter.setImageBitmap(result)
+        }
+    }
+
+    suspend fun applyFilter(filterCode: Int) = withContext(Dispatchers.Default) {
+        when (filterCode) {
+            SPEIA -> applySepiaFilter(tempImage, progressObject)
+
+            GREY -> applyGreyFilter(tempImage, progressObject)
+
+            SKETCH -> applySketchFilter(tempImage, progressObject)
+
+            CIRCULAR -> applyCircularFilter(tempImage, progressObject)
+
+            SHARPING -> applySharpining(tempImage, progressObject)
+            else ->
+                increaseContrast(
+                    tempImage,
+                    contrastLevel,
+                    progressObject
+                )
+        }
+    }
+
+
+    companion object {
+        const val SPEIA = 1
+        const val GREY = 2
+        const val SKETCH = 3
+        const val CIRCULAR = 4
+        const val SHARPING = 5
+        const val CONTRAST = 6
+    }
 }

@@ -62,5 +62,17 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBarRotation"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:visibility="gone"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/showImageRotate"
+        app:layout_constraintEnd_toEndOf="@+id/showImageRotate"
+        app:layout_constraintStart_toStartOf="@+id/showImageRotate"
+        app:layout_constraintTop_toTopOf="@+id/showImageRotate" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

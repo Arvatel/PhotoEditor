@@ -2,9 +2,11 @@ package com.arvatel.photoeditor.algorithms;
 
 import android.graphics.Bitmap;
 
+import com.arvatel.photoeditor.Progress;
+
 public class Scaling {
 
-    public  static Bitmap nearestNeighborScaling(Bitmap oldImage, int newWidth, int newHeight) {
+    public  static Bitmap nearestNeighborScaling(Bitmap oldImage, int newWidth, int newHeight, Progress progress) {
         Bitmap newImage = Bitmap.createBitmap(newWidth, newHeight, oldImage.getConfig());
         int oldWidth = oldImage.getWidth();
         int oldHeight = oldImage.getHeight();
@@ -17,6 +19,8 @@ public class Scaling {
                 srcY = Math.min(srcY, oldHeight - 1);
                 newImage.setPixel(x, y, oldImage.getPixel(srcX, srcY));
             }
+            if(x%100==0)
+                progress.report((double)x/newWidth);
         }
         return newImage;
     }

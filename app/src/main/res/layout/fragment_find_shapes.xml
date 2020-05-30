@@ -74,4 +74,15 @@
             android:text="@string/find_faces" />
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBarOpenCV"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/showImageFindShapes"
+        app:layout_constraintEnd_toEndOf="@+id/showImageFindShapes"
+        app:layout_constraintStart_toStartOf="@+id/showImageFindShapes"
+        app:layout_constraintTop_toTopOf="@+id/showImageFindShapes" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

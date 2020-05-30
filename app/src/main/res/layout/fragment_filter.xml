@@ -125,5 +125,15 @@ android:layout_height="match_parent"
 
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBarContrast"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/showImageFilter"
+        app:layout_constraintEnd_toEndOf="@+id/showImageFilter"
+        app:layout_constraintStart_toStartOf="@+id/showImageFilter"
+        app:layout_constraintTop_toTopOf="@+id/showImageFilter" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
