@@ -107,8 +107,10 @@ android:layout_height="match_parent"
             android:text="@string/unsharp_masking"
             style="@style/ButtonsLight"/>
 
-        <Button
+        <TextView
             android:id="@+id/buttonContrast"
+            android:textAlignment="center"
+            android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -130,6 +132,7 @@ android:layout_height="match_parent"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/showImageFilter"
         app:layout_constraintEnd_toEndOf="@+id/showImageFilter"
         app:layout_constraintStart_toStartOf="@+id/showImageFilter"

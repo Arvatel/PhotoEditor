@@ -25,7 +25,7 @@
     <string name="find_faces">Find faces</string>
     <string name="clear">Clear</string>
     <string name="unsharp_masking">Unsharp masking</string>
-    <string name="contrast">Contrast:</string>
+    <string name="contrast">choose contrast level:</string>
     <string name="scaling">Scaling</string>
     <string name="filters">Filters</string>
 

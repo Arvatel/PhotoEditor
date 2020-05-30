@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -26,53 +27,56 @@ class FilterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_filter, container, false)
+        val myview = inflater.inflate(R.layout.fragment_filter, container, false)
         tempImage = (activity as ImageFromActivityInterface).getMainImage()
-        contrastLevel = view.seekBarContrast.progress.toFloat() - 500f
-        progressObject = Progress(view.progressBarContrast)
+        contrastLevel = myview.seekBarContrast.progress.toFloat() - 500f
+        progressObject = Progress(myview.progressBarContrast)
 
-        view.showImageFilter.setImageBitmap(tempImage)
-
-        view.buttonApplyFilter.setOnClickListener {
-            (activity as ImageFromActivityInterface).setMainImage(view.showImageFilter.drawable.toBitmap())
-            Navigation.findNavController(view).navigate(R.id.action_filterFragment_to_photoEditorFragment)
+        myview.showImageFilter.setImageBitmap(tempImage)
+        myview.seekBarContrast.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                contrastLevel = myview.seekBarContrast.progress.toFloat() - 500f
+                startBackgroundThreadForFilter(CONTRAST)
+            }
+        })
+        myview.buttonApplyFilter.setOnClickListener {
+            (activity as ImageFromActivityInterface).setMainImage(myview.showImageFilter.drawable.toBitmap())
+            Navigation.findNavController(myview).navigate(R.id.action_filterFragment_to_photoEditorFragment)
         }
 
-        view.buttonSepia.setOnClickListener {
+        myview.buttonSepia.setOnClickListener {
 
             startBackgroundThreadForFilter(SPEIA)
         }
 
-        view.buttonGrey.setOnClickListener {
+        myview.buttonGrey.setOnClickListener {
             startBackgroundThreadForFilter(GREY)
         }
 
-        view.buttonSketch.setOnClickListener {
+        myview.buttonSketch.setOnClickListener {
             startBackgroundThreadForFilter(SKETCH)
         }
 
-        view.buttonBonus.setOnClickListener {
+        myview.buttonBonus.setOnClickListener {
             startBackgroundThreadForFilter(CIRCULAR)
         }
 
-        view.buttonUnsharp.setOnClickListener {
+        myview.buttonUnsharp.setOnClickListener {
             startBackgroundThreadForFilter(SHARPING)
         }
 
-        view.buttonContrast.setOnClickListener {
-            contrastLevel = view.seekBarContrast.progress.toFloat() - 500f
-            startBackgroundThreadForFilter(CONTRAST)
+        myview.buttonCancelFilter.setOnClickListener {
+            Navigation.findNavController(myview).navigate(R.id.action_filterFragment_to_photoEditorFragment)
         }
 
-        view.buttonCancelFilter.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_filterFragment_to_photoEditorFragment)
+        myview.buttonClearFilter.setOnClickListener {
+            myview.showImageFilter.setImageBitmap(tempImage)
         }
 
-        view.buttonClearFilter.setOnClickListener {
-            view.showImageFilter.setImageBitmap(tempImage)
-        }
-
-        return view
+        return myview
     }
 
     fun startBackgroundThreadForFilter(filterCode: Int) {
