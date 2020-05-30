@@ -24,12 +24,6 @@
 1. OpenCV
 1. Figma
 
-## How to download:
-1. Download file photoeditor.apk from directory download-app/
-2. Run this file on your device
-	* You should agree to install from unknown sources
-1. Done!
-
 
 ## Worked on the project:
 * Amr - Java developer (GitHub: https://github.com/AmrAboElhamd)
