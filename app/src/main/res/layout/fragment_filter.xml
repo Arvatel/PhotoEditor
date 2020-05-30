@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    tools:context=".FilterFragment">
+
+    <ImageView
+        android:id="@+id/showImageFilter"
+        style="@style/ShowPhotoStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/toolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <LinearLayout
+        android:id="@+id/toolBarFilter"
+        android:orientation="horizontal"
+        style="@style/ToolBarStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonCancelFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            style="@style/ButtonsDark"/>
+
+        <Button
+            android:id="@+id/buttonClearFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/clear"
+            style="@style/ButtonsLight"/>
+
+        <Button
+            android:id="@+id/buttonApplyFilter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/apply"
+            style="@style/ButtonsDark"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/ToolBarStyle"
+        android:id="@+id/toolBarStyles"
+        app:layout_constraintBottom_toTopOf="@id/toolBarFilter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonSepia"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/sepia"
+            style="@style/ButtonsLight"/>
+
+        <Button
+            android:id="@+id/buttonGrey"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/grey"
+            style="@style/ButtonsLight"/>
+
+        <Button
+            android:id="@+id/buttonSketch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/sketch"
+            style="@style/ButtonsLight"/>
+
+        <Button
+            android:id="@+id/buttonBonus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/bonus"
+            style="@style/ButtonsLight"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/toolBar"
+        style="@style/ToolBarStyle"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/toolBarStyles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonUnsharp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/unsharp_masking"
+            style="@style/ButtonsLight"/>
+
+        <Button
+            android:id="@+id/buttonContrast"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/contrast"
+            style="@style/ButtonsLight"/>
+
+        <SeekBar
+            android:id="@+id/seekBarContrast"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:max="1000"
+            android:progress="500"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarContrast"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/showImageFilter"
+        app:layout_constraintEnd_toEndOf="@+id/showImageFilter"
+        app:layout_constraintStart_toStartOf="@+id/showImageFilter"
+        app:layout_constraintTop_toTopOf="@+id/showImageFilter" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">PhotoEditor</string>
+    <string name="openPhoto">Tap to open photo</string>
+    <string name="useCamera">Tap to take photo</string>
+
+    <string name="hello_blank_fragment">hello</string>
+    <string name="textStyle">STYLES</string>
+    <string name="textTool">TOOLS</string>
+    <string name="textExport">EXPORT</string>
+    <string name="cancel">Cancel</string>
+    <string name="rotate">Rotate</string>
+    <string name="apply">Apply</string>
+    <string name="sepia">Sepia</string>
+    <string name="grey">Grey</string>
+    <string name="sketch">Sketch</string>
+    <string name="bonus">Bonus</string>
+    <string name="choose_your_way">Choose your way</string>
+    <string name="cube">Cube</string>
+    <string name="spline_lines">Spline Lines</string>
+    <string name="photo_editor">Photo editor</string>
+    <string name="line">Line</string>
+    <string name="cubic">cubic</string>
+    <string name="clean">Clean</string>
+    <string name="find_basic_shapes">Find basic shapes</string>
+    <string name="find_faces">Find faces</string>
+    <string name="clear">Clear</string>
+    <string name="unsharp_masking">Unsharp masking</string>
+    <string name="contrast">Contrast:</string>
+    <string name="scaling">Scaling</string>
+    <string name="filters">Filters</string>
+
 </resources>
