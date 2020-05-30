@@ -268,7 +268,7 @@ public class Filter {
         //back to the original pixel. If the result is outside (0-255),
         //change it back to the corresponding margin 0 or 255
         //https://microsolutions.info/2011/09/blurring-and-unsharp-masking.html
-        float amount = 0.6f;
+        float amount = 20f;
         int threshold = 3;
         if (unsharpRed >= threshold)
             oldRed += amount * unsharpRed;
