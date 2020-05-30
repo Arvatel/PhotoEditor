@@ -34,6 +34,7 @@ class ImageScalingFragment : Fragment() {
         view.showImageScaling.setImageBitmap(tempImage)
         progressObject = Progress(view.progressBarScalling)
 
+
         view.seekBarWidth.max = (activity as ImageFromActivityInterface).getMainImage().width * 2
         view.seekBarHeight.max = (activity as ImageFromActivityInterface).getMainImage().height * 2
         view.seekBarWidth.progress = view.seekBarWidth.max / 2
@@ -46,9 +47,19 @@ class ImageScalingFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+                val width =
+                    if (view.seekBarWidth.progress == 0) 1 else view.seekBarWidth.progress
+                val height =
+                    if (view.seekBarHeight.progress == 0) 1 else view.seekBarHeight.progress
+
+
                 viewLifecycleOwner.lifecycleScope.launch {
                     (activity as ImageFromActivityInterface).beforeLaoding(progressBarScalling)
-                    val result = getScalledImage(view.seekBarWidth.progress, view.seekBarHeight.progress)
+                    val result = getScalledImage(
+                        width,
+                        height
+                    )
                     (activity as ImageFromActivityInterface).afterLaoding(progressBarScalling)
                     view.showImageScaling.setImageBitmap(result)
                 }
@@ -59,9 +70,15 @@ class ImageScalingFragment : Fragment() {
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                val width =
+                    if (view.seekBarWidth.progress == 0) 1 else view.seekBarWidth.progress
+                val height =
+                    if (view.seekBarHeight.progress == 0) 1 else view.seekBarHeight.progress
+
+
                 viewLifecycleOwner.lifecycleScope.launch {
                     (activity as ImageFromActivityInterface).beforeLaoding(progressBarScalling)
-                    val result = getScalledImage(view.seekBarWidth.progress, view.seekBarHeight.progress)
+                    val result = getScalledImage(width, height)
                     (activity as ImageFromActivityInterface).afterLaoding(progressBarScalling)
                     view.showImageScaling.setImageBitmap(result)
                 }
