@@ -97,8 +97,6 @@ public class SplinesCustomView extends View {
             }
             makeCubicSpline = false;
         }
-//        Paint cirlcles = new Paint();
-//        cirlcles.setColor(Color.RED)
         for (Point p : points) {
             canvas.drawCircle(p.x, p.y,10, paint);
             System.out.println(p.toString());
@@ -145,7 +143,7 @@ class Point {
 
     //region strait line calculations
     //https://www.math.uh.edu/~jingqiu/math4364/spline.pdf
-    //cacluates the equation values y = xCoefficient*x - free
+    //calculates the equation values y = xCoefficient*x - free
     void calculate(Point prev) {
         float b = x - prev.x;
         float a = prev.x - x;

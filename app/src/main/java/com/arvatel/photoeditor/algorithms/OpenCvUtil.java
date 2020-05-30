@@ -56,10 +56,9 @@ public class OpenCvUtil {
     public static Bitmap searchForFaces(Bitmap imageBitmap, Context context) {
         // Face detector creation by loading source cascade xml file
         // using CascadeClassifier.
-        // the file can be downloade from
+        // the file:
         // https://github.com/opencv/opencv/blob/master/data/haarcascades/
         // haarcascade_frontalface_alt.xml
-        // and must be placed in same directory of the source java file
         CascadeClassifier faceDetector  = initializeOpenCVDependencies(context);
 
 
