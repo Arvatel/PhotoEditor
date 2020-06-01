@@ -2,7 +2,6 @@
     <string name="app_name">PhotoEditor</string>
     <string name="openPhoto">Tap to open photo</string>
     <string name="useCamera">Tap to take photo</string>
-
     <string name="hello_blank_fragment">hello</string>
     <string name="textStyle">STYLES</string>
     <string name="textTool">TOOLS</string>
