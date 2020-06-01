@@ -26,7 +26,7 @@
 
 
 ## Worked on the project:
-* Amr - Java developer (GitHub: https://github.com/AmrAboElhamd)
+* Amr - Java developer (GitHub: https://github.com/AmrAbuelhamd)
 * Kuklina Anastasia - Android developer (GitHub: https://github.com/Arvatel)
 * Kleinos Tatiana - designer (GitHub: https://github.com/Tanya-Kleynos)
 
